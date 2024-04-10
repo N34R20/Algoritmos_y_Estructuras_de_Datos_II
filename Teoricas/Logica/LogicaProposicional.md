@@ -123,24 +123,100 @@ $$ (p \wedge \neg q) \rightarrow \neg r $$
 
 Una valuacion es una funcion $v: \mathcal{V}\rightarrow {T, F}$ que asigna valores de verdad a las variables proposicionales
 
-Una valuacion satisface una proposicion $ \phi $ si v $\models \phi $ donde:
+Una valuacion satisface una proposicion $\phi$ si v $\models \phi$ donde:
 
-$v \models p $ si $ v(p) = T$
+$v \models p$ si $v(p) = T$
 
-$v \models \neg \phi $ sii $ v\nvDash \phi $ (i.e. no $ v \models \phi)$
+$v \models \neg \phi$ sii $v\nvDash \phi$ (i.e. no $v \models \phi)$
 
-$v \models \vee \phi $ sii $ v \models \phi $ o $ v \models \phi$
+$v \models \vee \phi$ sii $v \models \phi$ o $v \models \phi$
 
-$v \models \wedge \phi $ sii $ v \models \phi $ y $ v \models \phi$
+$v \models \wedge \phi$ sii $v \models \phi$ y $v \models \phi$
 
-$v \models \phi \rightarrow \psi$ sii $ v \nvDash \phi $ o $ \models \psi$
+$v \models \phi \rightarrow \psi$ sii $v \nvDash \phi$ o $v \models \psi$
 
-$v \models \phi \leftrightarrow \psi$ sii ($ v \models \phi $ sii $ c \models \psi$)
+$v \models \phi \leftrightarrow \psi$ sii ($v \models \phi$ sii $v \models \psi$)
 
 ## Tautologias y satisfacibilidad
 
-## Relacion entre tabals de verdad y valuaciones
+Dadas formulas $\phi$ y $\psi$
+
+- $\phi$ es **logicamente equivalente** a $\psi$ cuando $v \models \phi$ sii $v \models \psi$
+
+Una formula $\phi$ es
+
+- una **tautologia** si $v \models \psi$ sii para toda valuacion v
+- **satisfacible** si existe una valuacion v tal que $v \models \phi$
+- **insatisfactible** si no es satisfactible
+
+Un conjunto $S$ es
+
+- **satisfacible** si existe una valuacion v tal que $\forall \phi \in S$, se tiene $v \models \phi$
+- **insatisfactible** si no es satisfactible
+
+### Ejemplos
+
+**Tautologias**
+
+- $p \rightarrow p$
+- $\neg \neg p \rightarrow p$
+- $(p \rightarrow q) \leftrightarrow (\neg q \rightarrow \neg p)$
+
+**Formulas insatisfacibles**
+
+- $(\neg p \vee q) \wedge (\neg p \vee \neg q) \wedge p$
+- $(p \rightarrow q) \wedge p \wedge \neg q$
+
+## Tautologias e insatisfacibilidad
+
+#### Teorema
+
+Una formula $\phi$ es una tautologia sii $\neg \phi$ es insatisfactible
+
+#### Demostracion
+
+$\rightarrow$ Si $\phi$ es tautologia, para toda valuacion $v$, $v \models \phi$. Entonces, $v \not\models \neg \phi$ (i.e. v no satisface $\neg \phi$)
+
+$\leftarrow$ Si $\neg \phi$ es insatisfacible, para toda valuacion $v$, $v \not\models \neg \phi$. Luego $v \models \phi$
+
+#### Observacion
+
+Este resultado sugiere un metodo **indirecto** para probar que una formula $\phi$ es una tautologia, que es probar que $\neg\phi$ es **insatisfacible**
+
+## Relacion entre tablas de verdad y valuaciones
 
 ## Semantica trivaluada
 
+Supongamos que contamos con un simbolo relacional == que nos permite comparar numeros reales
+
+- Valor de verdad de las siguientes formulas?
+
+1==1
+(1+1) == 2
+0,5 == 2/4
+
+y esta?
+1/0 == 2
+
+Pasos para determinar $e_1 == e_2$ es verdadero o falso
+
+1. Obtener el numero real $r_1$ denotado por $e_1$
+2. Obtener el numero real $r_2$ denotado por $e_2$
+3. Comparar $r_1$ con $r_2$ para determinar si son iguales o no
+
+Consideremos
+$$1/0 == 2$$
+
+- Trabado en paso 1
+- Expersion 1/0 no denota **nigun** valor
+- 1/0 == 2 no es ni verdadera ni falsa porque no contamos con los numeros a comparar
+- Le damos un valore especial: $\bot$(**indefinido**)
+
 ## Semantica trivaluada (secuencial)
+
+Se llama secuencial porque ...
+
+- los terminos se evaluan de izquierda a derecha
+- la evaluacion termina cuando se puede deducir el valor de verdad, aunque el resto este inefinido
+
+Introducimos los operadores logicos $\wedge_L$ (y-luego, o _conditional and_, o **cand**), $\vee_L$ (o-luego o_conditional or, o **cor**)
