@@ -8,4 +8,8 @@ https://algs4.cs.princeton.edu/home/
 
 ## Utils
 
-https://detexify.kirelabs.org/classify.html
+- Listado de sımbolos matematicos:
+  https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols
+
+- Detexify: permite dibujar un sımbolo y te dice como se hace en latex.
+  https://detexify.kirelabs.org/classify.html

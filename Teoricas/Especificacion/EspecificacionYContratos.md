@@ -22,7 +22,7 @@
 
 - Una especificaion es un contrato entre el programador de una funciony el usuario de esa funcion.
 
-## Partes de una especificacion (contratos)
+## Partes de una especificacion (contrato)
 
 1. **Encabezado**
 2. **Precondicion** o clausula "requiere"
@@ -33,6 +33,13 @@
    - Especifica lo que la funcion **asegura** que se va acumplir despues de llamarla (se se cumplia la precondicion).
 
 ## Por que escribir la especificaicon del problema?
+
+- Nos ayuda a entender mejor el problema
+- Nos ayuda a construir el problema
+  - Derivacion (automatica) de Programas
+- Nos ayuda a prevenir errores en el programa
+  - Testing
+  - Verificacion (automatica) de Programas
 
 Algoritmo
 

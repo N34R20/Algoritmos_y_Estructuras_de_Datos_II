@@ -33,12 +33,37 @@
 \textbf{3.1 Precondicion mas debil en SmallLang}
 
 \vspace{0.8cm}
-\textbf{Ejercicio 1.} 
+\textbf{Ejercicio 1.} Calcular las siguientes expresiones, dodne a,b son 
+variables reales, i una variables entera y A es una secuencia de reales.
 \vspace{0.8cm}
 
+a) def(a+1)
+
+b) def(a/b)
+
+c) def($\sqrt{a/b}$)
+
 \vspace{0.8cm}
-\textbf{Ejercicio 2.} 
+\textbf{Ejercicio 2.} Calcular las siguientes Precondiciones mas debiles, donde a, b son variables reales, i un variable entera
+y A es una secuencia de reales.
 \vspace{0.8cm}
+
+a) $wp(a := a+1; b:= a/2, b\geq 0)$
+
+  La precondicion mas debil es $a\geq -1$
+
+
+\vspace{0.2cm}
+b) $wp(a := A[i] + 1; b:= a*a, b \neq 2)$
+
+$a = \sqrt 2 \wedge - \sqrt 2 \equiv abs(\sqrt 2)$
+$r + 1 = \sqrt 2$ 
+$r + 1 = -\sqrt 2$
+
+
+\vspace{0.2cm}
+c) $wp(a := A[i] + 1; a:= b*b, a \geq 0)$
+
 
 \vspace{0.8cm}
 \textbf{Ejercicio 3.} 

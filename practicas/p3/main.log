@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2024.4.6)  9 APR 2024 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.1) (preloaded format=pdflatex 2024.4.6)  10 APR 2024 11:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -47,24 +47,31 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
  [1
 
-{/Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map}] [1] (main.aux)
+{/Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/map/pdftex/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 44.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 44.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 44.
+ [1] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-03-14>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 456 strings out of 476358
- 9034 string characters out of 5791357
- 1926493 words of memory out of 5000000
- 22638 multiletter control sequences out of 15000+600000
- 560492 words of font info for 44 fonts, out of 8000000 for 9000
+ 474 strings out of 476358
+ 9223 string characters out of 5791357
+ 1929493 words of memory out of 5000000
+ 22649 multiletter control sequences out of 15000+600000
+ 562930 words of font info for 52 fonts, out of 8000000 for 9000
  0 hyphenation exceptions out of 8191
- 35i,5n,50p,195b,176s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmbx12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi864/cmbx12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmr17.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi1037/cmbx12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi1244/cmbx12.pk>
-Output written on main.pdf (2 pages, 40275 bytes).
+ 35i,5n,50p,236b,176s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi720/cmsy10.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmmi12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmex10.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmr12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmbx12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi864/cmbx12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi600/cmr17.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi1037/cmbx12.pk> </Users/admin/Library/Application Support/MiKTeX/texmfs/data/fonts/pk/ljfour/public/cm/dpi1244/cmbx12.pk>
+Output written on main.pdf (2 pages, 60778 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 189 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
