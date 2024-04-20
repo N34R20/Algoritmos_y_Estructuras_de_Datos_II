@@ -170,10 +170,10 @@ asegura {$result * result = x \wedge result \geq 0$}
 
 - Basicos
 
-  -
-  -
-  -
-  -
+  - Enteros($\Z$)
+  - Reales($\R$)
+  - Booleanos (Bool)
+  - Caracteres (Char)
 
 - Enumerados
 
@@ -205,7 +205,7 @@ asegura {$result * result = x \wedge result \geq 0$}
 
 ## Tipos $Bool$ (valor de verdad)
 
-- Su **conjunto base** es $\B$ = {**true,false**}.
+- Su **conjunto base** es $\mathcal{B}$ = {**true,false**}.
 
 - Conectivos logicos: !, &&, ||, con la semantica bi-valuada estandar.
 
@@ -257,8 +257,86 @@ enum _Nombre_ { constantes }
 
 ## Funciones y predicados auxiliares
 
+- Asignan un nombre a una expresion
+- Facilitan la lectura y la escritura de especificaciones
+- **Modularizan** la especificacion
+
+aux f(argumentos) : tipo = e;
+
+- f es el nombre de la funcion, que puede usarse en el resto de la especificacion en lugar de la expresion e.
+- Los argumentos son opcionales y se reemplazan en e cada vez que se usa f.
+- tipo es el tipo del resultado de la funcion (el tipo de e)
+
+pred p(argumentos){f}
+
+- p es el nombre del predicado, puede usarse en el reso de la especificacion en lugar de la formula f.
+
+### Ejemplos de funciones auxiliares
+
+- aux $suc(x: \Z): \Z = x + 1$
+
+- aux $e(): \R = 2,7182$
+
+- aux $inverso(x: \R): \R = \frac{1}{x}$
+
+- pred $esPar(n: \Z) \{n (mod 2) = 0\}$
+
+- pred $esImpar(n: \Z) \{\neg (esPar(n))\}$
+
+- pred $esFinde(d: Dia) \{d = SAB \vee d = DOM\}$
+
 ## Expresiones condicionales
+
+Funcion que elige entre dos elemntos del mismo tipo, segun una formula logica (guarda)
+
+- si la guarda es verdadera, elige el primero
+- si no, elige el segundo
+
+Por ejemplo
+
+-
+
+-
 
 ## Definir funciones auxiliares versus especificar problemas
 
 ## Especificar problemas
+
+## Volvemos a los Tipos: Secuencias
+
+## Secuencias: Notacion
+
+## Secuencias bien formadas
+
+## Funciones sobre secuencias
+
+## Predicando sobre secuencias
+
+## $\sum$ - Sumatoria
+
+## $\prod$ - Productoria
+
+## Alguna funciones auxiliares interesantes
+
+## Contando elementos en un conjunto
+
+## Conjuntos
+
+## Matrices
+
+Una matriz es una **secuencia de secuencias**, todas con la misma longitus (y no ser vacias).
+Cada posicion de esta secuencia es a su vez una secuencia, que representa una fila de la matriz
+
+- Definimos $Mat<\Z>$ como un remplazo sintactico para $Seq<Seq<\Z>>$
+
+- Una $Seq<Seq<\Z>>$ representa una matriz si todas las secuencias tienen la misma longitud!
+
+- Tenemos funciones auxiliares para obtener la cantidad de filas y columnas de una matriz:
+
+aux $filas(m: Mat<\Z>): \Z = |m|$
+
+aux $columnas(m: Mat<\Z>): \Z$ = if filas(m) > 0 then |m[0]| else 0 fi
+
+- En muchas ocaciones debemos recibir matrices **cuadradas**. Definimos tambien:
+
+pred $esMatrizCuadrada(m: Seq<Seq<\Z>>) \{ esMatriz(m) \wedge filas(m) = colmnas(m) \}$

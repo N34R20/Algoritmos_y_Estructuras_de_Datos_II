@@ -20,7 +20,7 @@
 
 ## Contratos
 
-- Una especificaion es un contrato entre el programador de una funciony el usuario de esa funcion.
+- Una especificacion es un contrato entre el programador de una funcion y el usuario de esa funcion.
 
 ## Partes de una especificacion (contrato)
 
@@ -40,7 +40,3 @@
 - Nos ayuda a prevenir errores en el programa
   - Testing
   - Verificacion (automatica) de Programas
-
-Algoritmo
-
-Programa

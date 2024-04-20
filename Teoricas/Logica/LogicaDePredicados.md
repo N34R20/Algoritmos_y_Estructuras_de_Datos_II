@@ -95,9 +95,19 @@ _Syntax sugar_ para nuestro lenguaje de especificacion vamos a aplicar cuantific
 
 ## Ejemplos
 
--
+- que dice el siguiente predicado?
 
-$$ $$
+- Todos los ennteros entre 1 y 10 son pares:
+  $$ (\forall n: \Z)(1 \leq n \leq 10 \rightarrow n (mod 2)=0) $$
+
+- Existe un entero entre 1 y 10 que es par:
+  $$ (\exists n: \Z)(1 \leq n \leq 10 \land n (mod 2)=0) $$
+
+- En general, si queremos decir que todos los enteros $x$ que cumplen $P(x)$ tambien cumplen $Q(x)$, decimos:
+  $$ (\forall x: \Z)(P(x) \rightarrow Q(x)) $$
+
+- Para decir que existe un entero que cumple $P(x)$ y que tambien cumple $Q(x)$, decimos:
+  $$ (\exists x: \Z)(P(x) \land Q(x)) $$
 
 ## Algunas reglas de deduccion
 
@@ -181,12 +191,67 @@ Si $\phi = \forall x. (R(x,y) \rightarrow P(X))$, entonces $FV(\phi)$ = {y} y $B
 
 ## Estructura de primer orden
 
+Dado un lenguaje de primer orden , una **estructura para $\mathcal{L}$**, $\mathcal{M}$, es un par
+
+$$ \mathcal{M} = (M,I)$$
+
+donde
+
+- M (**universo**) es un conjunto no vacio.
+- I (**funcion de interpretacion**) asigna funciones y predicados sobre M a simbolos de $\mathcal{L}$ de la siguiente manera:
+
+  1. Para toda constante $ c, I(c) \in M$
+  2. Para todo $f$ de aridad $ n > 0, I(f): M^n \rightarrow M$
+  3. Para todo predicado P de aridad $ n \geq 0 I(P) \subseteq M^n $
+  4. $I(\doteq)$ es la relacion de identidad sobre M
+
 ## Asignacion
+
+Sea $\mathcal{M}$ una estructura para $\mathcal{L}$. Una **asignacion** es una funcion $s:\mathcal{V} \rightarrow M $
+
+Dado $s$ podemos definir $\^{s}$ que se puede aplicar a terminos para obtener el individuo del universo que denota
+
+### Extension de una asignacion a terminos
+
+$$ \^{s}(x) \overset{def}{=} s(x) $$
+
+$$ \^{s}(x) \overset{def}{=} I(c) $$
+
+$$ \^{s}(f(t_1, ..., t_n)) \overset{def}{=} I(f)(\^{s}(t_1), ..., \^{s}(t_n)) $$
+
+Nota: a veces abusamos de la notacion y escribimos simplemente $s$ en lugar de $\^{s}$
 
 ## Satisfacibilidad
 
+La relacion $s \models_\mathcal{M} \phi$ establece que la asignacion $s$ satisface la formula $\phi$ en la estructura $\mathcal{M}$
+
+- Vamos a definir la relacion $s \models_\mathcal{M} \phi$ de manera formal usando induccion estructural en $\phi$
+
+- Si $s$ es una asignacion y $a \in M$, usamos la notacion $s[x \leftarrow a]$ para denotar la asignacion que se comporta igual que $s$ salvo en el elemnto $x$, en cuyo caso retorna $a$
+
 ## Validez
+
+- Una formula $\phi$ es **satisfacible en $\mathcal{M}$** si existe una asignacion $s$ tal que
+
+$$s\models_{\mathcal{M}} \phi$$
+
+- Una formula $\phi$ es **satisfacible** si existe un $\mathcal{M}$ tal que $\phi$ es satisfacible en $\mathcal{M}$. En caso contrario se dice que $\phi$ es **insatisfacible**
+
+-
+
+-
+
+- **Nota:** $\phi$ es valida si $\neg \phi$ es insatisfacible
 
 ## Ejemplo de formulas validas
 
 ## Resumen de PRED
+
+- Sintaxis
+
+  - Lenguaje de primer orden $\mathcal{L}$
+  - Terminos sobre $\mathcal{L}$ (denotan individuos)
+  - Formulas sobre $\mathcal{L}$ (denotan valores de verdad)
+
+- Semantica
+  - Estructuras: universo + interpretacion de los simbolos de $\mathcal{L}$
