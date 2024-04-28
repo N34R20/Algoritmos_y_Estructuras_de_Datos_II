@@ -2,7 +2,7 @@
 
 ## Tripla de Horae
 
-$$ \{P\} S \{Q\} $$
+$$\{P\} S \{Q\}$$
 
 dada una tripla de Horae es **valida** si:
 
@@ -27,20 +27,20 @@ Ademas tenemos las siguientes estructuras de control:
 
 ## Precondicion mas debil
 
-- Definicion: la precondicion mas debil de un programa S respecto de una postcondicion Q es el predicado P mas debil posible tal que $ \{P\} S \{Q\} $
+- Definicion: la precondicion mas debil de un programa S respecto de una postcondicion Q es el predicado P mas debil posible tal que $\{P\} S \{Q\}$
 
 - Notacion: wp(S,Q)
 
-- Teorema: decimo que $ \{P\} S \{Q\} $ es valida si $$ P \rightarrow_L wp(S,Q) $$
+- Teorema: decimo que $\{P\} S \{Q\}$ es valida si $$P \rightarrow_L wp(S,Q)$$
 
 ## Axiomas wp
 
-- Axioma 1: $$ wp(x := E, Q) \equiv def(E) \land_L Q_E^{x}$$
-- Axioma 2: $$ wp(skip, Q) \equiv Q$$
-- Axioma 3: $$ wp(S1; S2, Q) \equiv wp(S1, wp(S2,Q))$$
-- Axioma 4: $$ wp(if B then S1 else S2 endif, Q) \equiv def(B) \land_l (B \land wp(S1, Q)) \lor (\neg B \land wp(S2, Q)) $$
+- Axioma 1: $$wp(x := E, Q) \equiv def(E) \land_L Q_E^{x}$$
+- Axioma 2: $$wp(skip, Q) \equiv Q$$
+- Axioma 3: $$wp(S1; S2, Q) \equiv wp(S1, wp(S2,Q))$$
+- Axioma 4: $$wp(if B then S1 else S2 endif, Q) \equiv def(B) \land_l (B \land wp(S1, Q)) \lor (\neg B \land wp(S2, Q))$$
 
-- Observacion: $$ wp(b[i]:=E, Q) \equiv wp(b:=setAt(b, i, E), Q)$$
+- Observacion: $$wp(b[i]:=E, Q) \equiv wp(b:=setAt(b, i, E), Q)$$
 
 ## Ciclos
 
@@ -66,9 +66,9 @@ Si cuando el ciclo termina, el estaod resultante es el estado posterior a la ult
 
 $$H_0(Q) \equiv def(B) \land \neg B \land Q,$$
 
-$$H\_{k+1}(Q) \equiv def(B) \land \neg B \land wp(S, H_k(Q))$$
+$$H_{k+1}(Q) \equiv def(B) \land \neg B \land wp(S, H_k(Q))$$
 
-$k\geq 0.$
+para $k\geq 0.$
 
 - **Propiedad:** Si el ciclo realiza a lo sumo k iteraciones, entonces
 
