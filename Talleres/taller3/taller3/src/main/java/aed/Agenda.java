@@ -3,7 +3,6 @@ package aed;
 public class Agenda {
 
     public Agenda(Fecha fechaActual) {
-        throw new UnsupportedOperationException("No implementada aun");
     }
 
     public void agregarRecordatorio(Recordatorio recordatorio) {

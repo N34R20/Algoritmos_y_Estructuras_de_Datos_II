@@ -10,7 +10,7 @@ public class Fecha {
     }
 
     public Integer dia() {
-        throw new UnsupportedOperationException("No implementada aun");
+        Fecha(0);
     }
 
     public Integer mes() {
