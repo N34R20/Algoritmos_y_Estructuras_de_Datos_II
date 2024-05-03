@@ -80,19 +80,66 @@ SmallLang unicamente soporta las siguientes instrucciones:
 
 $$P \rightarrow_L wp(S,Q)$$
 
+- Si para demostrar la validez de $\{P\} S \{Q\}$ nos alcanza con probar la formula
+  $$P \rightarrow_L wp(S,Q)$$
+
+- Entonces lo que necesitamos un mecanismo para obtener la wp de (S,Q)
+
+- Afortunadamente, existe un conjunto de **axiomas** que podemos usar para obtener la wp
+
+- Antes de empezar a ver los axiomas, definamos primero dos predicados: $def(E)$ y $Q_{E}^x$
+
 ## Predicado def(E)
+
+- **Definicion**: Dada una expreison E, llamamos def(E) a las condiciones necesarias para que E este **definida**. Por ejemplo:
+
+1. $def(x+y) \equiv def(x) \land def(y)$
+2. $def(x/y) \equiv def(x) \land (def(y) \land_L y \neq 0)$
+3. $def(\sqrt x) \equiv def(x) \land_L x \geq 0$
+4. $def(a[i] + 3) \equiv (def(a) \land def(i)) \land_L 0 \leq i < |a|$
+
+- Suponemos $def(x) \equiv True$ para todas las variables, para simplificar la notacion.
+
+- Con esta hipotesis extra:
+
+1. $def(x+y) \equiv True$
+2. $def(x/y) \equiv y \neq 0$
+3. $def(\sqrt x) \equiv  x \geq 0$
+4. $def(a[i] + 3) \equiv 0 \leq i < |a|$
 
 ## Predicado $Q_{E}^x$
 
+- **Definicion**: Dado un predicado Q, el predicado $Q_{E}^x$ se obtiene reemplazando en Q todas las apariciones **libres** de la variable x por E.
+
+1. $Q \equiv 0 \leq i < j < n \land_L a[i] \leq x < a[j]$
+
+   $Q_{k}^{i} \equiv 0 \leq k < j < n \land_L a[k] \leq x < a[j]$
+
+   $Q_{i+1}^{i} \equiv 0 \leq i +1 < j < n \land_L a[i+1] \leq x < a[j]$
+
+2. $Q \equiv 0 \leq i < n \land_L (\forall j: \Z) (a[j] = x)$
+
+   $Q_{k}^{j} \equiv 0 \leq i < n \land_L (\forall j: \Z) (a[j] = x)$
+
 ## Axiomas
 
-### Axioma 1
+### Axioma 1: asignacion
+
+- $ wp(x := E, Q) \equiv def(E) \land*L$ $Q*{E}^{x} $
+
+- Ejemplo:
+
+  {??}
+
+  x:= x + 1
+
+  {Q: x \geq}
 
 ### Axioma 2
 
 ### Axioma 3
 
-## Asigancion a elementos de una secuencia
+## Asignacion a elementos de una secuencia
 
 ## Propiedades
 
