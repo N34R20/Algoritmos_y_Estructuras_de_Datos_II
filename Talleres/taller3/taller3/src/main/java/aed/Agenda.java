@@ -2,7 +2,10 @@ package aed;
 
 public class Agenda {
 
+    private Fecha fecha;
+
     public Agenda(Fecha fechaActual) {
+        this.fecha = new Fecha(fechaActual.dia(), fechaActual.mes());
     }
 
     public void agregarRecordatorio(Recordatorio recordatorio) {

@@ -2,30 +2,45 @@ package aed;
 
 public class Recordatorio {
 
+    private String mensaje;
+    private Fecha fecha;
+    private Horario horario;
+
     public Recordatorio(String mensaje, Fecha fecha, Horario horario) {
-        throw new UnsupportedOperationException("No implementada aun");
+        this.mensaje = mensaje;
+        this.fecha = new Fecha(fecha.dia(), fecha.mes());
+        this.horario = new Horario(horario.hora(), horario.minutos());
     }
 
     public Horario horario() {
-        throw new UnsupportedOperationException("No implementada aun");
+        return new Horario(horario.hora(), horario.minutos());
     }
 
     public Fecha fecha() {
-        throw new UnsupportedOperationException("No implementada aun");
+        return new Fecha(fecha.dia(), fecha.mes());
     }
 
     public String mensaje() {
-        throw new UnsupportedOperationException("No implementada aun");
+        return new String(mensaje);
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("No implementada aun");
+        return mensaje + " @ " + fecha + " " + horario;
     }
 
     @Override
     public boolean equals(Object otro) {
-        throw new UnsupportedOperationException("No implementada aun");
+        if (otro instanceof Recordatorio) {
+            // Convertir el objeto a tipo Fecha
+            Recordatorio otroRecordatorio = (Recordatorio) otro;
+            // Comparar día y mes
+            return this.mensaje == otroRecordatorio.mensaje
+                    && this.fecha == otroRecordatorio.fecha
+                    && this.horario == otroRecordatorio.horario;
+        }
+        // Si el objeto no es de tipo Fecha, no puede ser igual
+        return false;
     }
 
 }
