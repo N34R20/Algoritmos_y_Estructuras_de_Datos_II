@@ -36,8 +36,8 @@ public class Recordatorio {
             Recordatorio otroRecordatorio = (Recordatorio) otro;
             // Comparar día y mes
             return this.mensaje == otroRecordatorio.mensaje
-                    && this.fecha == otroRecordatorio.fecha
-                    && this.horario == otroRecordatorio.horario;
+                    && otroRecordatorio.fecha.equals(this.fecha)
+                    && otroRecordatorio.horario.equals(this.horario);
         }
         // Si el objeto no es de tipo Fecha, no puede ser igual
         return false;

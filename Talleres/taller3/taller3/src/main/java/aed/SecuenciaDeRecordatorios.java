@@ -6,12 +6,10 @@ interface SecuenciaDeRecordatorios {
      * Devuelve el largo de la secuencia.
      * 
      */
-    /*
-     * public int longitud();
-     * 
-     * return arreglo.length;
-     * 
-     * /**
+
+    public int longitud();
+
+    /**
      * Agrega un elemento al final de la secuencia.
      * 
      */
@@ -35,8 +33,6 @@ interface SecuenciaDeRecordatorios {
      * 
      */
     public void modificarPosicion(int indice, Recordatorio valor);
-
-    this.arreglo[indice]=valor;
 
     /**
      * Retornar un vector con los mismos elementos

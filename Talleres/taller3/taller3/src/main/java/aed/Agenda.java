@@ -3,29 +3,40 @@ package aed;
 public class Agenda {
 
     private Fecha fecha;
+    private ArregloRedimensionableDeRecordatorios arreglo;
 
     public Agenda(Fecha fechaActual) {
         this.fecha = new Fecha(fechaActual.dia(), fechaActual.mes());
+        this.arreglo = new ArregloRedimensionableDeRecordatorios();
     }
 
     public void agregarRecordatorio(Recordatorio recordatorio) {
-        throw new UnsupportedOperationException("No implementada aun");
+        arreglo.agregarAtras(recordatorio);
 
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("No implementada aun");
 
+        StringBuilder result = new StringBuilder(fecha.toString() + "\n");
+        result.append("=====\n");
+        for (int i = 0; i < arreglo.longitud(); i++) {
+            if (arreglo.obtener(i).fecha().equals(fecha)) {
+                result.append(arreglo.obtener(i).toString()).append("\n");
+
+            }
+        }
+
+        return result.toString();
     }
 
     public void incrementarDia() {
-        throw new UnsupportedOperationException("No implementada aun");
+        fecha.incrementarDia();
 
     }
 
     public Fecha fechaActual() {
-        throw new UnsupportedOperationException("No implementada aun");
+        return fecha = new Fecha(fecha.dia(), fecha.mes());
     }
 
 }
