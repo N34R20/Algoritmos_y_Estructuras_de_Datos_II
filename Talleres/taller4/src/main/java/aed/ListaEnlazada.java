@@ -39,17 +39,23 @@ public class ListaEnlazada<T> implements Secuencia<T> {
         Nodo nuevo = new Nodo(elem);
         if (primero == null) {
             primero = nuevo;
+            longitud++;
         } else {
             Nodo actual = primero;
             while (actual.sig != null) {
                 actual = actual.sig;
             }
             actual.sig = nuevo;
+            longitud++;
         }
     }
 
     public T obtener(int i) {
-        return ListaEnlazada[i];
+        if (i == 0) {
+            return primero.valor;
+        } else {
+            return ultimo.valor;
+        }
     }
 
     public void eliminar(int i) {
