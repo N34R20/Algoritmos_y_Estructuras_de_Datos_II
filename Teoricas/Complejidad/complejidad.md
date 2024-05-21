@@ -232,6 +232,57 @@ Obtener buenas cotas inferiores **ajustadas** es en general **dificil**, aunque 
 Por ejemplo, para ordeanr n numeros una cota inferiro seria $\Omega(n)$, y para multiplicar dos matrices de orden n seria $\Omega(n2)$;
 sin embargo, los mejor algoritmos conocidos son de ordenes $O(n log n)$ y $O(n^{2.8})$ respectivamente.
 
+### Propiedades de $\Omega$
+
+1. Para cualquier funcion _f_ se tiene que $f \in \Omega(f)$
+2. $f \in \Omega(g) \rightarrow \Omega(f) \subset \Omega(g)$
+3. $\Omega(f) = \Omega(g) \leftrightarrow f \in \Omega(g) \land g \in \Omega(f)$
+4. Si $f \in \Omega(g) \land g \in \Omega(h)  \rightarrow f \in \Omega(h)$
+5. Si $f \in \Omega(g) \land f \in \Omega(h)  \rightarrow f \in \Omega(max(g,h))$
+6. Regla de la suma : Si $f_1 \in \Omega(g) \land f_2 \in \Omega(h) \rightarrow f_1 + f_2 \in \Omega(g+h)$
+7. Regla del producto : Si $f_1 \in \Omega(g) \land f_2 \in \Omega(h) \rightarrow f_1 * f_2 \in \Omega(g * h)$
+8. si $\exists \lim_{n\rightarrow \infin} \frac{f(n)}{g(n)} = k$, segun los valores que tome k:
+
+   i) Si $k \neq 0 \land k < \infin \rightarrow \Omega(f) = \Omega(g)$
+
+   ii) Si $k = 0 \rightarrow g \in \Omega(f) \equiv \Omega(g) \subset \Omega(f)$, pero sin embargo verifica que $g \notin \Omega(f)$
+
+## Orden exacto - Notacion $\Theta$
+
+- Como ultima cota asintotica, definiremos los conjuntos de funciones que crecen asintoticamente de la misma forma
+
+$$ \Theta(f) = O(f) \cap \Omega(f) $$
+
+- Intuitivamente, $t \in \Theta(f)$ indica que _t_ esta acotada por _f_ tanto superior como inferiormente.
+
+$f \in \Theta(g)$ significa que _f_ crece (a partir de cierto momento) igual que _g_
+
+$$
+\Theta(g) = \{f|\exists n_0, k_1, k_2> 0/ n\geq n_0 \rightarrow k_1 * g(n) \leq f(n) \leq k_2 * g(n)\}
+$$
+
+### Propiedades de $\Theta$
+
+1. Para cualquier funcion _f_ se tiene que $f \in \Theta(f)$
+
+2. $f \in \Theta(g) \rightarrow \Theta(f) = \Theta(g)$
+
+3. $\Theta(f) = \Theta(g) \leftrightarrow f \in \Theta(g) \land g \in \Theta(f)$
+
+4. Si $f \in \Theta(g) \land g \in \Theta(h)  \rightarrow f \in \Theta(h)$
+
+5. Si $f \in \Theta(g) \land f \in \Theta(h)  \rightarrow f \in \Theta(max(g,h))$
+
+6. Regla de la suma : Si $f_1 \in \Theta(g) \land f_2 \in \Theta(h) \rightarrow f_1 + f_2 \in \Theta(max(g,h)) = \Theta(g+h)$
+
+7. Regla del producto : Si $f_1 \in \Theta(g) \land f_2 \in \Theta(h) \rightarrow f_1 * f_2 \in \Theta(g * h)$
+
+8. si $\exists \lim_{n\rightarrow \infin} \frac{f(n)}{g(n)} = k$, segun los valores que tome k:
+
+   i) Si $k \neq 0 \land k < \infin \rightarrow \Theta(f) = \Theta(g)$
+
+   ii) Si $k = 0 \rightarrow \Theta(f) \neq \Theta(g)$
+
 ## Observaciones
 
 La utilizacion de las cotas asintoticas para comparar funciones de tiempo de ejecucion se basa en la hipotesis de que son suficientes para decidir el mejor algoritmo, prescindiendo las constantes de proporcionalidad
@@ -252,3 +303,11 @@ Cual es la complejidad de multiplicar dos enteros?
 - Entonces, para ese problema, la medida va a decir que todos los enteros miden lo mismo.
 
 ## Complejidad de algoritmos recursivos
+
+Como calculamos la complejidad de los algoritmos recursivos?
+
+- Dijimos: "El tiempo de ejecucion de las llamadas a procedimientos recursivos va a dar lugar a ecuaciones en recurrencia, que veremos posteriormente".
+
+Igual podemos pensarlo: Hay que resolver ecuaciones de recurrencia, por ejemplo:
+
+- $T(n) = n + T(n-1)$
