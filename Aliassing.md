@@ -1,0 +1,3 @@
+# Aliassing (o Seudonimización)
+
+En informática, el fenomeno de **aliassing**(o **seudonimizar**) describe una situación en la que se puede acceder a una ubicación de datos en la memoria a través de diferentes nombres simbólicos en el programa. Por lo tanto, modificar los datos a través de un nombre modifica implícitamente los valores asociados con todos los nombres con seudonimizaciones, lo que puede no ser esperado por el programador. Como resultado, seudonimizar hace que sea particularmente difícil comprender, analizar y optimizar los programas. Los analizadores de seudonimización tienen la intención de crear y calcular información útil para comprender la seudonimización en los programas.

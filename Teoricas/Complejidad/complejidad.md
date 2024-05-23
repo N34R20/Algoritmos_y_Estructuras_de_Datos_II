@@ -79,11 +79,48 @@ Por que compliejidad en funcion del **tamaño de la entrada**?
 
 ## Analisis del caso peor, medio o mejor.
 
+Distintas instancias, aunque tengan el mismo tamaño, pueden hacer que el algoritmo se comporte de maneras muy diferentes, y por lo tanto, tomar **distinto tiempo**, y/o requerir **distinta cantidad de memoria**
+
+Por eso estudiamos tres casos para un mismo algoritmo:
+
+- El caso **peor**
+- El caso **mejor**
+- El caso **medio**
+
 ### Analisis del caso _peor_
+
+Sea $t(l)$ el timepo de ejecucion de un algoritmo sobre una instacia _l_
+
+$$T_{peor}(n) = max_{instancias l, |l| = n} \{t(l)\}$$
+
+Intuitivamente, $T_{peor}(n)$ es el timepo de ejecucion del algoritmo sobre la instancia que implica **mayor tiempo de ejecucion** (entre los inputs de tamaño _n_)
+
+- Da garantias sobre las prestaciones del algoritmo
 
 ### Analisis del caso _mejor_
 
+$$T_{mejor}(n) = min_{instancias l, |l| = n} \{t(l)\}$$
+
+Intuitivamente, $T_{mejor}(n)$ es el timepo de ejecucion del algoritmo sobre la instancia que implica **menor tiempo de ejecucion** (entre los inputs de tamaño _n_)
+
+- No da mucha informacion
+
 ### Analisis del caso _medio_
+
+Intuitivamente, $T_{prom}(n)$ corresponde al tiempo "**promedio**" de ejecucion, al tiempo "**esperado**" sobre instancias "tipicas"
+
+Se define como la esperanza matematica de la variable aleatoria definida por todas las posibilidades ejecuciones del algoritmo para un tamaño de la entrada dado, con probabilidades de que estas ocurran para esa entrada
+
+- _P(l)_ probabilidad de que el input sea la instancia _l_
+- $T_{prom}(n) = \sum_{instancias l, |l| = n} \{P(l) t(l)\}$
+
+Por que comillas?
+
+- Requiere conocer la distribucion estdistica del input: en muchos casos eso no es realista
+- En muchos casos la matematica se complica, y se termina haciendo hipotesis simplificatorias poco realistas
+- Podemos tener algoritmos para los cuales nigun input requiere tiempo medio (por ejemplo, un algoritmo que requiere o bien 1 o bien 100 pasos)
+
+## Ejemplo: Busqueda
 
 ## Principio de invarianza
 
@@ -99,7 +136,7 @@ $$ T_1(n) \leq c T_2(n) $$
 
 ## Analisis Asintotico
 
-Los dis'ntos algoritmos que resuelven un mismo problema pueden
+Los distintos algoritmos que resuelven un mismo problema pueden
 tener grandes diferencias en su tiempo de ejecución, a veces, de
 **órdenes de magnitud**
 
@@ -113,9 +150,11 @@ algoritmos sí pueden variar de manera signiﬁcativa
 
 **El orden** (logaritmico, lineal, cuadratico, exponencial, etc.) de la funcion **$T(n)$**, que mide la complejidad temporal de un algoritmo, es el que expresa el comportamiento dominante cuadno el tamaño de la entrada es grande.
 
+## Comportamiento Asintotico
+
 comportamiento asintotico: comportamiento para valores de la entrada suficientemente grandes.
 
-El objetivo del estudio de la complejidad algoritmica es determinar el comportamiento asintotico de un algoritmo
+El objetivo del **estudio de la complejidad** algoritmica es determinar el **comportamiento asintotico** de un algoritmo
 
 Medidas del comportamiento asintotico de la complejidad:
 
