@@ -5,15 +5,16 @@ Estructura de grafos
 con un nodo principal y que para llegar a una hoja existe un unico camino -> se deduce que no tiene ciclos
 
 Arbol
-val: T
-izq: Nodo
-der: Nodo
+
+- val: T
+- izq: Nodo
+- der: Nodo
 
 tiene un nodo que tambien es de tipo arbol o NULL
 
 ### Como recorremos un arbol binario?
 
-funcion recursiva
+- funcion recursiva
 
 a la izquierda hay un arbol y a la derecha tambien
 
@@ -33,7 +34,6 @@ else
 ```
 proc ContarAB(ab : ArbolBinario): Z
     asegura (contar(ab.raiz))
-
 ```
 
 ejercicio:
