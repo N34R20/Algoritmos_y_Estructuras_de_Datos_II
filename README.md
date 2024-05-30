@@ -4,7 +4,9 @@ Este repositorio consta del material bibliografico y ejercicios de la materia Al
 
 ## Bibliografia
 
-https://algs4.cs.princeton.edu/home/
+- https://algs4.cs.princeton.edu/home/
+- Science of Programming - D. Gries.
+- Introduction to Algorithms - Cromen, Leiserson, Rivest, Stein.
 
 ## Utils
 
