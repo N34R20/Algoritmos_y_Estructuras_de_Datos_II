@@ -2,6 +2,15 @@ package aed;
 
 public class SistemaSIU {
     // Completar atributos privados
+    
+    private carreras;
+    private estudiante;
+    private materias;
+    private inscriptos;
+    private inscripciones;
+    private docentes;
+    private sonMismaMateria;
+
 
     enum CargoDocente{
         AY2,
