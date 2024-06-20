@@ -35,20 +35,40 @@ public class Trie<T> {
     }
 
     public void borrar(String clave) {
-        borrar(clave);
-    }
-
-    private boolean borrar(String clave) {
         TrieNode actual = getRoot();
         for (char c : clave.toCharArray()) {
             actual = actual.getChild(c);
-            // if (actual == null) {
-            // return null;
-            // }
         }
-        TrieNode padre = actual.getFather();
+
+        if (!actual.hijos.isEmpty()) {
+            actual.data = null;
+            actual.esFinPalabra = false;
+        } else {
+            TrieNode padre = actual.getFather();
+            char[] caracteres = clave.toCharArray();
+            int i = 1;
+
+            while (padre.hijos.size() == 1 && padre.data == null) {
+                padre.killChild(caracteres[clave.length() - i]);
+                i++;
+            }
+            padre.killChild(caracteres[clave.length() - i]);
+        }
 
     }
+
+    // public Trie<T>.TrieNode ultimoNodo(String clave) {
+    // Trie<T>.TrieNode actual = getRoot();for(
+    // char c:clave.toCharArray())
+    // {
+    // actual = actual.getChild(c);
+    // if (actual == null) {
+    // ;
+    // }
+    // Trie<T>.TrieNode ultimoNodo = actual;
+    // return ultimoNodo;
+    // }
+    // }
 
     public TrieNode getRoot() {
         return raiz;
@@ -86,6 +106,15 @@ public class Trie<T> {
 
         public TrieNode getFather() {
             return this.padre;
+        }
+
+        public void killChild(char valorHijo) {
+            for (int i = 0; i < hijos.size(); i++) {
+                if (hijos.get(i).valor == valorHijo) {
+                    hijos.remove(i);
+                    return;
+                }
+            }
         }
     }
 
