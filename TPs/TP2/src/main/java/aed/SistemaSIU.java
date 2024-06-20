@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SistemaSIU {
 
     LU libretas;
-    TrieCarrera carreras;
+    TrieCarrera sistema;
 
     enum CargoDocente {
         AY2,
@@ -29,17 +29,35 @@ public class SistemaSIU {
                 this.insertar(clave, 1);
             }
         }
+
+        // Método para desinscribir y restar 1 al valor existente de la clave
+        public void desinscribir(String clave) {
+            Integer valorActual = this.buscar(clave);
+            if (valorActual != 0) {
+                this.insertar(clave, valorActual - 1);
+            } else {
+                this.insertar(clave, 0);
+            }
+        }
+    }
+
+    public class TrieMaterias extends Trie<Materia> {
+        // Constructor
+        public TrieMaterias() {
+
+        }
+
     }
 
     public class TrieNodoCarrera {
         char valor;
         ArrayList<TrieNodoCarrera> hijos;
         boolean esFinPalabra;
-        Trie<Materia> trieMaterias;
+        TrieMaterias trieMaterias;
 
         public TrieNodoCarrera(char valor) {
             this.valor = valor;
-            this.trieMaterias = new Trie<>();
+            this.trieMaterias = new TrieMaterias();
             this.hijos = new ArrayList<>();
             this.esFinPalabra = false;
         }
@@ -59,13 +77,13 @@ public class SistemaSIU {
             return hijo;
         }
 
-        public Trie<Materia> getTrieMaterias() {
+        public TrieMaterias getTrieMaterias() {
             return trieMaterias;
         }
 
     }
 
-    private class TrieCarrera {
+    private class TrieCarrera extends Trie<TrieMaterias> {
 
         private final TrieNodoCarrera raiz;
 
@@ -83,7 +101,7 @@ public class SistemaSIU {
                 actual = hijo;
             }
             actual.esFinPalabra = true;
-            actual.trieMaterias.insertar(nombreMateria, materia);
+            actual.getTrieMaterias().insertar(nombreMateria, materia);
         }
 
         public Materia buscar(String carrera, String nombreMateria) {
@@ -96,6 +114,20 @@ public class SistemaSIU {
             }
 
             return actual.getTrieMaterias().buscar(nombreMateria);
+        }
+
+        public TrieMaterias getTrieMateriaForCarerra(String carrera) {
+
+            TrieNodoCarrera actual = raiz;
+            for (char c : carrera.toCharArray()) {
+                actual = actual.getChild(c);
+                if (actual == null) {
+                    return null;
+                }
+            }
+
+            TrieMaterias trieMaterias = actual.getTrieMaterias();
+            return trieMaterias;
         }
 
         public String[] getCarrerasEnOrdenLexicografico() {
@@ -113,6 +145,28 @@ public class SistemaSIU {
                 obtenerCarreras(hijo, prefijo + hijo.valor, resultado);
             }
         }
+
+        public String[] getMateriasEnOrdenLexicografico(String carrera) {
+            // creamos un ArrayList vacio que guardara el resultado final
+            ArrayList<String> resultado = new ArrayList<>();
+
+            Trie<Materia> TrieMateria = getTrieMateriaForCarerra(carrera);
+            Trie<Materia>.TrieNode raizMaterias = TrieMateria.getRoot();
+
+            obtenerMaterias(raizMaterias, "", resultado);
+            return resultado.toArray(new String[0]);
+        }
+
+        private void obtenerMaterias(Trie<Materia>.TrieNode nodo, String prefijo, ArrayList<String> resultado) {
+            if (nodo.esFinPalabra) {
+                resultado.add(prefijo);
+            }
+            nodo.hijos.sort((n1, n2) -> Character.compare(n1.valor, n2.valor));
+            for (Trie<Materia>.TrieNode hijo : nodo.hijos) {
+                obtenerMaterias(hijo, prefijo + hijo.valor, resultado);
+            }
+        }
+
     }
 
     /*
@@ -120,18 +174,25 @@ public class SistemaSIU {
      */
     public SistemaSIU(InfoMateria[] infoMaterias, String[] libretasUniversitarias) {
 
-        this.carreras = new TrieCarrera();
+        this.sistema = new TrieCarrera();
 
         for (InfoMateria infoM : infoMaterias) {
-            ParCarreraMateria[] retrievedArray = infoM.getParesCarreraMateria();
+            ParCarreraMateria[] paresCarreraMateria = infoM.getParesCarreraMateria();
 
             int[] plantelDocente = { 0, 0, 0, 0 };
             Materia materia = new Materia(0, plantelDocente);
 
-            for (ParCarreraMateria pcm : retrievedArray) {
+            for (ParCarreraMateria pcm : paresCarreraMateria) {
                 String nombreMateria = pcm.getNombreMateria();
-                String nombreCarrera = pcm.getCarrera();
-                carreras.insertar(nombreCarrera, nombreMateria, materia);
+                String carrera = pcm.getCarrera();
+                sistema.insertar(carrera, nombreMateria, materia);
+                materia.addParCarreraMateria(pcm);
+
+                TrieMaterias TrieMateria = sistema.getTrieMateriaForCarerra(carrera);
+                // Trie<Materia>.TrieNode raizCarrera = TrieMateria.getRoot();
+
+                NodoCarerraYMateria nycm = new NodoCarerraYMateria(TrieMateria, nombreMateria);
+                materia.addNombresYNodos(nycm);
 
             }
         }
@@ -147,7 +208,7 @@ public class SistemaSIU {
      */
     public void inscribir(String estudiante, String carrera, String nombreMateria) {
         libretas.inscribir(estudiante);
-        Materia materia = carreras.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera, nombreMateria);
         materia.addConjuntoAlumnos(estudiante);
 
     }
@@ -157,7 +218,7 @@ public class SistemaSIU {
      */
     public void agregarDocente(CargoDocente cargo, String carrera, String nombreMateria) {
 
-        Materia materia = carreras.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera, nombreMateria);
         materia.incrementarCargo(cargo);
     }
 
@@ -165,7 +226,7 @@ public class SistemaSIU {
      * Complejidad de plantelDocente:
      */
     public int[] plantelDocente(String nombreMateria, String carrera) {
-        Materia materia = carreras.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera, nombreMateria);
         return materia.getPlantelDocente();
 
     }
@@ -174,33 +235,23 @@ public class SistemaSIU {
      * Complejidad de cerrarMateria:
      */
     public void cerrarMateria(String nombreMateria, String carrera) {
-        // Buscar la materia en el trie
-        Materia materia = carreras.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera, nombreMateria);
+        ArrayList<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
+        // ArrayList<ParCarreraMateria> nombresDeLaMismaMateria =
+        // materia.getParCarreraMaterias();
+        ArrayList<NodoCarerraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
 
-        // Si la materia no existe, salir
-        if (materia == null) {
-            System.out.println("La materia '" + nombreMateria + "' no existe en la carrera '" + carrera + "'");
-            return;
+        //
+        for (String alumno : conjuntoDeAlumnos) {
+            libretas.desinscribir(alumno);
         }
 
-        // Iterar sobre todas las materias en el trie y desligar la referencia a la
-        // materia cerrada
-        desligarMateria(carreras.raiz, materia);
-    }
+        // for (ParCarreraMateria pcm : nombresDeLaMismaMateria) {
+        // sistema.insertar(pcm.carrera, pcm.nombreMateria, null);
+        // }
 
-    // Método recursivo para desligar la referencia a la materia cerrada en todo el
-    // trie
-    private void desligarMateria(TrieNodoCarrera nodo, Materia materia) {
-        // Recorrer los hijos del nodo actual
-        for (TrieNodoCarrera hijo : nodo.hijos) {
-            if (hijo != null) {
-                // Desligar la referencia a la materia si coincide con la que queremos cerrar
-                if (hijo.trieMaterias.buscar(materia.nombre) == materia) {
-                    hijo.trieMaterias.insertar(materia.nombre, null);
-                }
-                // Llamar recursivamente para los hijos de este nodo
-                desligarMateria(hijo, materia);
-            }
+        for (NodoCarerraYMateria nycm : nombresYNodosMateria) {
+            nycm.raizCarrera().borrar(nycm.getNombreMateria());
         }
     }
 
@@ -208,7 +259,7 @@ public class SistemaSIU {
      * Complejidad de inscriptos:
      */
     public int inscriptos(String nombreMateria, String carrera) {
-        Materia materia = carreras.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera, nombreMateria);
         return materia.getCantidadInscriptos();
     }
 
@@ -216,7 +267,7 @@ public class SistemaSIU {
      * Complejidad de excedeCupo:
      */
     public boolean excedeCupo(String nombreMateria, String carrera) {
-        Materia materia = carreras.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera, nombreMateria);
         int[] plantel = materia.getPlantelDocente();
         int cantInscriptos = materia.getCantidadInscriptos();
         boolean res = false;
@@ -234,14 +285,14 @@ public class SistemaSIU {
      * Complejidad de carreras:
      */
     public String[] carreras() {
-        return carreras.getCarrerasEnOrdenLexicografico();
+        return sistema.getCarrerasEnOrdenLexicografico();
     }
 
     /*
      * Complejidad de materias:
      */
     public String[] materias(String carrera) {
-        throw new UnsupportedOperationException("Método no implementado aún");
+        return sistema.getMateriasEnOrdenLexicografico(carrera);
     }
 
     /*

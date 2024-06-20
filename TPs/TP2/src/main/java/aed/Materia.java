@@ -9,12 +9,16 @@ public class Materia {
     private int cantidadInscriptos;
     private int[] plantelDocente;
     private ArrayList<String> conjuntoAlumnos;
-    private ArrayList<String> nombresMateria;
+    private ArrayList<ParCarreraMateria> nombres;
+    private ArrayList<NodoCarerraYMateria> nombresYNodos;
 
     public Materia(int cantidadInscriptos, int[] plantelDocente) {
         this.cantidadInscriptos = cantidadInscriptos;
         this.plantelDocente = plantelDocente;
         this.conjuntoAlumnos = new ArrayList<String>();
+        this.nombres = new ArrayList<ParCarreraMateria>();
+        this.nombresYNodos = new ArrayList<NodoCarerraYMateria>();
+
     }
 
     public int getCantidadInscriptos() {
@@ -40,6 +44,22 @@ public class Materia {
     public void addConjuntoAlumnos(String alumno) {
         this.conjuntoAlumnos.add(alumno);
         setCantidadInscriptos(this.cantidadInscriptos + 1);
+    }
+
+    public ArrayList<ParCarreraMateria> getParCarreraMaterias() {
+        return nombres;
+    }
+
+    public void addParCarreraMateria(ParCarreraMateria pcm) {
+        this.nombres.add(pcm);
+    }
+
+    public ArrayList<NodoCarerraYMateria> getNombresYNodos() {
+        return nombresYNodos;
+    }
+
+    public void addNombresYNodos(NodoCarerraYMateria ncym) {
+        this.nombresYNodos.add(ncym);
     }
 
     public void incrementarCargo(CargoDocente cargo) {

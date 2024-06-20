@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Trie<T> {
 
-    private final TrieNode<T> raiz;
+    private final TrieNode raiz;
 
     public Trie() {
-        raiz = new TrieNode<>('\0'); // Nodo raiz vacio
+        raiz = new TrieNode('\0', null); // Nodo raiz vacio
     }
 
     public void insertar(String palabra, T data) {
-        TrieNode<T> actual = raiz;
+        TrieNode actual = raiz;
         for (char c : palabra.toCharArray()) {
-            TrieNode<T> hijo = actual.getChild(c);
+            TrieNode hijo = actual.getChild(c);
             if (hijo == null) {
                 hijo = actual.addChild(c);
             }
@@ -24,7 +24,7 @@ public class Trie<T> {
     }
 
     public T buscar(String palabra) {
-        TrieNode<T> actual = raiz;
+        TrieNode actual = raiz;
         for (char c : palabra.toCharArray()) {
             actual = actual.getChild(c);
             if (actual == null) {
@@ -34,29 +34,43 @@ public class Trie<T> {
         return actual.esFinPalabra ? actual.data : null;
     }
 
-    public boolean empiezaCon(String prefijo) {
-        throw new UnsupportedOperationException("Método no implementado aún");
+    public void borrar(String clave) {
+        borrar(clave);
     }
 
-    public TrieNode<T> getRoot() {
+    private boolean borrar(String clave) {
+        TrieNode actual = getRoot();
+        for (char c : clave.toCharArray()) {
+            actual = actual.getChild(c);
+            // if (actual == null) {
+            // return null;
+            // }
+        }
+        TrieNode padre = actual.getFather();
+
+    }
+
+    public TrieNode getRoot() {
         return raiz;
     }
 
-    public class TrieNode<T> {
+    public class TrieNode {
         char valor;
-        ArrayList<TrieNode<T>> hijos;
+        TrieNode padre;
+        ArrayList<TrieNode> hijos;
         boolean esFinPalabra;
         T data;
 
-        public TrieNode(char valor) {
+        public TrieNode(char valor, TrieNode padre) {
             this.valor = valor;
-            this.hijos = new ArrayList<>();
+            this.hijos = new ArrayList<TrieNode>();
             this.esFinPalabra = false;
             this.data = null;
+            this.padre = padre;
         }
 
-        public TrieNode<T> getChild(char c) {
-            for (TrieNode<T> hijo : hijos) {
+        public TrieNode getChild(char c) {
+            for (TrieNode hijo : hijos) {
                 if (hijo.valor == c) {
                     return hijo;
                 }
@@ -64,10 +78,14 @@ public class Trie<T> {
             return null;
         }
 
-        public TrieNode<T> addChild(char c) {
-            TrieNode<T> hijo = new TrieNode<>(c);
+        public TrieNode addChild(char c) {
+            TrieNode hijo = new TrieNode(c, this);
             hijos.add(hijo);
             return hijo;
+        }
+
+        public TrieNode getFather() {
+            return this.padre;
         }
     }
 
