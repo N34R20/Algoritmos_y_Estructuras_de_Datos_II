@@ -186,10 +186,8 @@ public class SistemaSIU {
                 String nombreMateria = pcm.getNombreMateria();
                 String carrera = pcm.getCarrera();
                 sistema.insertar(carrera, nombreMateria, materia);
-                materia.addParCarreraMateria(pcm);
 
                 TrieMaterias TrieMateria = sistema.getTrieMateriaForCarerra(carrera);
-                // Trie<Materia>.TrieNode raizCarrera = TrieMateria.getRoot();
 
                 NodoCarerraYMateria nycm = new NodoCarerraYMateria(TrieMateria, nombreMateria);
                 materia.addNombresYNodos(nycm);
@@ -237,18 +235,13 @@ public class SistemaSIU {
     public void cerrarMateria(String nombreMateria, String carrera) {
         Materia materia = sistema.buscar(carrera, nombreMateria);
         ArrayList<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
-        // ArrayList<ParCarreraMateria> nombresDeLaMismaMateria =
-        // materia.getParCarreraMaterias();
+
         ArrayList<NodoCarerraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
 
         //
         for (String alumno : conjuntoDeAlumnos) {
             libretas.desinscribir(alumno);
         }
-
-        // for (ParCarreraMateria pcm : nombresDeLaMismaMateria) {
-        // sistema.insertar(pcm.carrera, pcm.nombreMateria, null);
-        // }
 
         for (NodoCarerraYMateria nycm : nombresYNodosMateria) {
             nycm.raizCarrera().borrar(nycm.getNombreMateria());

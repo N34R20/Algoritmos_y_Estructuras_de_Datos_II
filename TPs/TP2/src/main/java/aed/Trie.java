@@ -57,19 +57,6 @@ public class Trie<T> {
 
     }
 
-    // public Trie<T>.TrieNode ultimoNodo(String clave) {
-    // Trie<T>.TrieNode actual = getRoot();for(
-    // char c:clave.toCharArray())
-    // {
-    // actual = actual.getChild(c);
-    // if (actual == null) {
-    // ;
-    // }
-    // Trie<T>.TrieNode ultimoNodo = actual;
-    // return ultimoNodo;
-    // }
-    // }
-
     public TrieNode getRoot() {
         return raiz;
     }
