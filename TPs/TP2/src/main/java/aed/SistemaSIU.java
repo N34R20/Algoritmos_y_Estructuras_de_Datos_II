@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SistemaSIU {
 
-    LU libretas;
+    LU estudiantes;
     TrieCarrera sistema;
 
     enum CargoDocente {
@@ -195,9 +195,9 @@ public class SistemaSIU {
             }
         }
 
-        this.libretas = new LU();
+        this.estudiantes = new LU();
         for (String libreta : libretasUniversitarias) {
-            libretas.insertar(libreta, 0);
+            estudiantes.insertar(libreta, 0);
         }
     }
 
@@ -205,7 +205,7 @@ public class SistemaSIU {
      * Complejidad de inscribir:
      */
     public void inscribir(String estudiante, String carrera, String nombreMateria) {
-        libretas.inscribir(estudiante);
+        estudiantes.inscribir(estudiante);
         Materia materia = sistema.buscar(carrera, nombreMateria);
         materia.addConjuntoAlumnos(estudiante);
 
@@ -240,7 +240,7 @@ public class SistemaSIU {
 
         //
         for (String alumno : conjuntoDeAlumnos) {
-            libretas.desinscribir(alumno);
+            estudiantes.desinscribir(alumno);
         }
 
         for (NodoCarerraYMateria nycm : nombresYNodosMateria) {
@@ -292,6 +292,6 @@ public class SistemaSIU {
      * Complejidad de materiasInscriptas:
      */
     public int materiasInscriptas(String estudiante) {
-        return libretas.buscar(estudiante);
+        return estudiantes.buscar(estudiante);
     }
 }
