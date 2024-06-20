@@ -116,7 +116,7 @@ public class SistemaSIU {
             return actual.getTrieMaterias().buscar(nombreMateria);
         }
 
-        public TrieMaterias getTrieMateriaForCarerra(String carrera) {
+        public TrieMaterias getTrieMateriaForCarrera(String carrera) {
 
             TrieNodoCarrera actual = raiz;
             for (char c : carrera.toCharArray()) {
@@ -131,6 +131,7 @@ public class SistemaSIU {
         }
 
         public String[] getCarrerasEnOrdenLexicografico() {
+            // creamos un ArrayList vacio que guardara el resultado final
             ArrayList<String> resultado = new ArrayList<>();
             obtenerCarreras(raiz, "", resultado);
             return resultado.toArray(new String[0]);
@@ -150,7 +151,7 @@ public class SistemaSIU {
             // creamos un ArrayList vacio que guardara el resultado final
             ArrayList<String> resultado = new ArrayList<>();
 
-            Trie<Materia> TrieMateria = getTrieMateriaForCarerra(carrera);
+            Trie<Materia> TrieMateria = getTrieMateriaForCarrera(carrera);
             Trie<Materia>.TrieNode raizMaterias = TrieMateria.getRoot();
 
             obtenerMaterias(raizMaterias, "", resultado);
@@ -171,6 +172,8 @@ public class SistemaSIU {
 
     /*
      * Complejidad de SistemaSIU:
+     * $O(\sum_{c\in C}|c| * |M_c| + \sum_{m\in M} \sum_{n\in N_m} |n| + E)$
+     * 
      */
     public SistemaSIU(InfoMateria[] infoMaterias, String[] libretasUniversitarias) {
 
@@ -187,7 +190,7 @@ public class SistemaSIU {
                 String carrera = pcm.getCarrera();
                 sistema.insertar(carrera, nombreMateria, materia);
 
-                TrieMaterias TrieMateria = sistema.getTrieMateriaForCarerra(carrera);
+                TrieMaterias TrieMateria = sistema.getTrieMateriaForCarrera(carrera);
 
                 NodoCarerraYMateria nycm = new NodoCarerraYMateria(TrieMateria, nombreMateria);
                 materia.addNombresYNodos(nycm);
