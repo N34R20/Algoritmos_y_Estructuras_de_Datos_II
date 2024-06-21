@@ -49,41 +49,41 @@ public class SistemaSIU {
 
     }
 
-    public class TrieNodoCarrera {
-        char valor;
-        ArrayList<TrieNodoCarrera> hijos;
-        boolean esFinPalabra;
-        TrieMaterias trieMaterias;
-
-        public TrieNodoCarrera(char valor) {
-            this.valor = valor;
-            this.trieMaterias = new TrieMaterias();
-            this.hijos = new ArrayList<>();
-            this.esFinPalabra = false;
-        }
-
-        public TrieNodoCarrera getChild(char c) {
-            for (TrieNodoCarrera hijo : hijos) {
-                if (hijo.valor == c) {
-                    return hijo;
-                }
-            }
-            return null;
-        }
-
-        public TrieNodoCarrera addChild(char c) {
-            TrieNodoCarrera hijo = new TrieNodoCarrera(c);
-            hijos.add(hijo);
-            return hijo;
-        }
-
-        public TrieMaterias getTrieMaterias() {
-            return trieMaterias;
-        }
-
-    }
-
     private class TrieCarrera extends Trie<TrieMaterias> {
+
+        public class TrieNodoCarrera {
+            char valor;
+            ArrayList<TrieNodoCarrera> hijos;
+            boolean esFinPalabra;
+            TrieMaterias trieMaterias;
+
+            public TrieNodoCarrera(char valor) {
+                this.valor = valor;
+                this.trieMaterias = new TrieMaterias();
+                this.hijos = new ArrayList<>();
+                this.esFinPalabra = false;
+            }
+
+            public TrieNodoCarrera getChild(char c) {
+                for (TrieNodoCarrera hijo : hijos) {
+                    if (hijo.valor == c) {
+                        return hijo;
+                    }
+                }
+                return null;
+            }
+
+            public TrieNodoCarrera addChild(char c) {
+                TrieNodoCarrera hijo = new TrieNodoCarrera(c);
+                hijos.add(hijo);
+                return hijo;
+            }
+
+            public TrieMaterias getTrieMaterias() {
+                return trieMaterias;
+            }
+
+        }
 
         private final TrieNodoCarrera raiz;
 
