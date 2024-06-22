@@ -2,19 +2,29 @@
 
 Este repositorio consta del material bibliografico y ejercicios de la materia Algoritmos y Estructuras de Datos II (Facultad de Ciencias Exactas UBA)
 
-## Talleres
+## [Talleres](/Talleres/)
 
-## Teoricas
+- [taller 1 - Introduccion a Java](/Talleres/taller1%20-%20Intro%20a%20Java/)
 
-## Practicas
+- [taller 2 - Debugging](/Talleres/taller2%20-%20Debugging/)
 
-## Trabajos Practicos
+- [taller 3 - OOP](/Talleres/taller3%20-%20OOP/)
 
-- TP1 - Especificacion y Weakest Precondition
+- [taller 4 - Listas Doblemente Enlazadas](/Talleres/taller4%20-%20ListasDoblementeEnlazadas/)
 
-- [TP2 - Diseño e Implementacion de estructuras][Trabajos Practicos/TP1 - Especificacion y WeakestPrecondition]
+- [taller 5 - Arbol Binario de Busqueda](/Talleres/taller5%20-%20ABB/)
 
-## Bibliografia
+## [Teoricas](/Teoricas/)
+
+## [Practicas](/Practicas/)
+
+## [Trabajos Practicos](/Trabajos%20Practicos/)
+
+- [TP1 - Especificacion y Weakest Precondition](/Trabajos%20Practicos/TP1%20-%20Especificacion%20y%20WeakestPrecondition/)
+
+- [TP2 - Diseño e Implementacion de estructuras](/Trabajos%20Practicos/TP2%20-%20Diseño%20e%20Implementacion%20de%20estructuras/)
+
+## [Bibliografia](/Bibliografia/)
 
 - https://algs4.cs.princeton.edu/home/
 - Science of Programming - D. Gries.
