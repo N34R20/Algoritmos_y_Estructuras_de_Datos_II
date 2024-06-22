@@ -81,3 +81,27 @@ Si la carrera no tiene tal materia la posicion correspondiente esta vacia (null)
 Se podria tener tmb un array de arrays, cosa de poder indexar por materia y por carrera
 
 4. Para calcular el cupo de cada materia vamos a tener un array que represente la cantidad de docente por su calidad d=[profesor, JTP, A1, A2] y tmb tenemos un array por la cantidad de alumnos que se estima por cada docente c=[300, 250, 30, 20] de forma que para calcular la cota de cupo se usaria el minimo de este conjunto: $min:=\{d[0].c[0];d[1].c[1];d[2].c[2];d[3].c[3]\}$
+
+for (InfoMateria : InfoMaterias [])
+
+InfoMateria = [(Strin carrera, String nombreMateria)(Strin carrera2, String nombreMateria2)(Strin carrera3, String nombreMateria3) .... ]
+
+            cantInscriptos plantelDocente conjuntoAlumnos nodosYNombres
+
+Materia = < 0, {0,0,0,0}, {}, {} >
+
+o -> c1 -> m1 -> Materia
+-> c2 -> m2 -> Materia
+.
+.
+.
+-> cn -> mn -> Materia
+
+(c1, m7)
+
+(nodoAlTrieDeCarrera, nombreMateria, nombreCarrera)
+
+ParNOmbreCarrera.Carrera == nomrbeCarerra
+entra por el trie
+
+o ->
