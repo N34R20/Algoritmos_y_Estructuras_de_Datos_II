@@ -146,14 +146,24 @@ public class SistemaSIU {
             return trieMaterias;
         }
 
-        // metodo para ..
+        // metodo para obtener una lista de Strings con todas las carerras del sistema
         public String[] getCarrerasEnOrdenLexicografico() {
             // creamos un ArrayList vacio que guardara el resultado final
             ArrayList<String> resultado = new ArrayList<>();
+
+            // usamos la funcion recursiva obtenerCarrera sobre la raiz, un String vacio ""
+            // y la lista vacia resultado que va a terminar cuando no haya mas caminos por
+            // recorrer
             obtenerCarreras(raiz, "", resultado);
+
+            // por ultimo convertimos resultado en un Array de Strings y lo devolvemos
             return resultado.toArray(new String[0]);
         }
 
+        // funcion recursiva para obtener una lista con los nombres de las carerras que
+        // com caso base para agregar una palabra a la lista considera que
+        // nodo.esFinPalabra sea true y de no serlo va yendo a traves de los hijos en
+        // ordenloxigrafico hasta agotar todos los caminos posibles
         private void obtenerCarreras(TrieNodoCarrera nodo, String prefijo, ArrayList<String> resultado) {
             if (nodo.esFinPalabra) {
                 resultado.add(prefijo);
@@ -239,7 +249,7 @@ public class SistemaSIU {
 
                 TrieMaterias TrieMateria = sistema.getTrieMateriaForCarrera(carrera);
 
-                NodoCarerraYMateria nycm = new NodoCarerraYMateria(TrieMateria, nombreMateria);
+                NodoCarreraYMateria nycm = new NodoCarreraYMateria(TrieMateria, nombreMateria);
                 materia.addNombresYNodos(nycm);
 
             }
@@ -421,14 +431,14 @@ public class SistemaSIU {
         Materia materia = sistema.buscar(carrera, nombreMateria);
         ArrayList<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
 
-        ArrayList<NodoCarerraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
+        ArrayList<NodoCarreraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
 
         //
         for (String alumno : conjuntoDeAlumnos) {
             estudiantes.desinscribir(alumno);
         }
 
-        for (NodoCarerraYMateria nycm : nombresYNodosMateria) {
+        for (NodoCarreraYMateria nycm : nombresYNodosMateria) {
             nycm.raizCarrera().borrar(nycm.getNombreMateria());
         }
     }

@@ -25,7 +25,8 @@ public class Trie<T> {
 
     // empezas desde la raiz
     // y agregas caracter por caracter hasta ir al ultimo nodo
-    // donde asocias los datos T y declaras que termina la palabra
+    // donde asocias los datos T y declaras que termina la palabra con esFinPalabra
+    // = true
     public void insertar(String palabra, T data) {
         TrieNode actual = raiz;
         for (char c : palabra.toCharArray()) {
@@ -39,7 +40,7 @@ public class Trie<T> {
         actual.data = data;
     }
 
-    // Desde la raiz vas caracter por caracter de la palabra y
+    // Desde la raiz vas caracter por caracter del input palabra
     public T buscar(String palabra) {
         TrieNode actual = raiz;
         for (char c : palabra.toCharArray()) {
@@ -127,6 +128,9 @@ public class Trie<T> {
             this.padre = padre;
         }
 
+        // recorre la lista de hijos de un determinado nodo que esta acotada por la
+        // cantidad caracteres ASCI hasta encontrar el que le pedimos
+        // en el peor caso no lo encuentra y devuelve null
         public TrieNode getChild(char c) {
             for (TrieNode hijo : hijos) {
                 if (hijo.valor == c) {
@@ -137,9 +141,16 @@ public class Trie<T> {
         }
 
         public TrieNode addChild(char c) {
-            TrieNode hijo = new TrieNode(c, this);
-            hijos.add(hijo);
-            return hijo;
+            // Verificar si ya existe un hijo con el valor 'c'
+            for (TrieNode hijo : hijos) {
+                if (hijo.valor == c) {
+                    // Si ya existe, retornar ese nodo en lugar de crear uno nuevo
+                    return hijo;
+                }
+            }
+            TrieNode nuevoHijo = new TrieNode(c, this);
+            hijos.add(nuevoHijo);
+            return nuevoHijo;
         }
 
         public TrieNode getFather() {
