@@ -2,6 +2,12 @@ package aed;
 
 import aed.SistemaSIU.TrieMaterias;
 
+// Inavriante de representacion de NodoCarreraYMateria:
+
+// - trieMateria es un TrieMaterias
+// - nombreMateria es un String
+
+// - nombreMateria es una clave valida en trieMateria 
 public class NodoCarerraYMateria {
     TrieMaterias trieMateria;
     String nombreMateria;

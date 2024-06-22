@@ -4,6 +4,16 @@ import java.util.ArrayList;
 
 import aed.SistemaSIU.CargoDocente;
 
+// Inavriante de representacion de Materia:
+
+// - cantidadInscriptos >= 0
+// - |plantelDocente| = 4 y para todo i natural,
+// si i esta en rango entonces planetlDocente[i] >=0
+// - cantidadInscriptos = |conjuntoAlumnos|
+// - Cada elemento de conjuntoAlumnos es una 
+// clave valida (existente) en la instancia de TrieEstudiante
+// - |nombres| = |nombresYNodos|
+
 public class Materia {
 
     private int cantidadInscriptos;
@@ -66,18 +76,19 @@ public class Materia {
         // Verificar el tipo de cargo y sumar uno a la posición correspondiente en el
         // array
         switch (cargo) {
-            case AY2:
-                this.plantelDocente[3]++;
-                break;
-            case AY1:
-                this.plantelDocente[2]++;
+            case PROF:
+                this.plantelDocente[0]++;
                 break;
             case JTP:
                 this.plantelDocente[1]++;
                 break;
-            case PROF:
-                this.plantelDocente[0]++;
+            case AY1:
+                this.plantelDocente[2]++;
                 break;
+            case AY2:
+                this.plantelDocente[3]++;
+                break;
+
             default:
                 System.out.println("Cargo no válido");
         }

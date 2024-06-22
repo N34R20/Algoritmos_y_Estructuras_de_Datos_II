@@ -2,6 +2,18 @@ package aed;
 
 import java.util.ArrayList;
 
+// Clase Trie<T> generica donde puede almacenar cualquier valor, posteriormente las clases que hacen al sistema son extensiones de este Trie<T>
+
+// Invariante de Representacion:
+
+// - Existe un nodo del Trie que es raiz y este no tiene padre ni almacena nigun valor
+// - Cada nodo tiene un hijo, este es un nodo tambien
+// - Si un nodo tiene valor true respecto a esFinPalabra
+// existe una secuencia unica de nodos que representan 
+// el valor del nodo actual
+// - Cada nodo tiene o valor(caracter) o significado(dato), pero no niguno
+// puede tener ambos.   
+
 public class Trie<T> {
 
     private final TrieNode raiz;

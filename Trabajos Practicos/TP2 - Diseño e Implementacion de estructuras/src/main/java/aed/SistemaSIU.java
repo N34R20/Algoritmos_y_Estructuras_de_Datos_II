@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SistemaSIU {
 
-    LU estudiantes;
+    TrieEstudiante estudiantes;
     TrieCarrera sistema;
 
     enum CargoDocente {
@@ -14,9 +14,16 @@ public class SistemaSIU {
         PROF
     }
 
-    public class LU extends Trie<Integer> {
+    // Invariante de Representacion de TrieEstudiante:
+
+    // - Es un Trie
+    // - Acceso a claves en O(1), pues para toda clave su largo nunca es mayor a 7
+    // osea que esta acotada.
+    // - los valores de tods las claves son enteros >= 0
+
+    public class TrieEstudiante extends Trie<Integer> {
         // Constructor
-        public LU() {
+        public TrieEstudiante() {
 
         }
 
@@ -41,6 +48,11 @@ public class SistemaSIU {
         }
     }
 
+    // Invariante de Representacion de TrieMaterias:
+
+    // - Es un Trie
+    // - Almacena Materia como valores
+
     public class TrieMaterias extends Trie<Materia> {
         // Constructor
         public TrieMaterias() {
@@ -48,6 +60,11 @@ public class SistemaSIU {
         }
 
     }
+
+    // Invariante de Representacion de TrieCarreras:
+
+    // - Es un Trie
+    // - Almacena TrieMaterias como valores
 
     private class TrieCarrera extends Trie<TrieMaterias> {
 
@@ -170,9 +187,13 @@ public class SistemaSIU {
 
     }
 
+    // ======================
+    // METODOS DE SISTEMA SIU
+    // ======================
+
     /*
      * Complejidad de SistemaSIU:
-     * $O(\sum_{c\in C}|c| * |M_c| + \sum_{m\in M} \sum_{n\in N_m} |n| + E)$
+     * O(\sum_{c\in C}|c| * |M_c| + \sum_{m\in M} \sum_{n\in N_m} |n| + E)
      * 
      */
     public SistemaSIU(InfoMateria[] infoMaterias, String[] libretasUniversitarias) {
@@ -206,6 +227,15 @@ public class SistemaSIU {
 
     /*
      * Complejidad de inscribir:
+     * O(|c| + |m|)
+     * 
+     * Para inscribir tomamos el String estudiante que es la clave para acceder al
+     * TrieEstudiante, que se recorre en O(1), y sumamos 1
+     * aumnetando el total de materias incscriptas
+     * y luego con carrera y materia recorremos el trieCarrera con la clave carrera
+     * en O(|c|)
+     * para llegar a el trieMateria al qeu recorremos con la clave materia en O(|m|)
+     * para agregar al conjuntoAlumno de materia la libreta del estudiante
      */
     public void inscribir(String estudiante, String carrera, String nombreMateria) {
         estudiantes.inscribir(estudiante);
@@ -215,7 +245,17 @@ public class SistemaSIU {
     }
 
     /*
+     * Complejidad de inscriptos:
+     * * O(|c| + |m|)
+     */
+    public int inscriptos(String nombreMateria, String carrera) {
+        Materia materia = sistema.buscar(carrera, nombreMateria);
+        return materia.getCantidadInscriptos();
+    }
+
+    /*
      * Complejidad de agregarDocente:
+     * O(|c| + |m|)
      */
     public void agregarDocente(CargoDocente cargo, String carrera, String nombreMateria) {
 
@@ -225,6 +265,7 @@ public class SistemaSIU {
 
     /*
      * Complejidad de plantelDocente:
+     * O(|c| + |m|)
      */
     public int[] plantelDocente(String nombreMateria, String carrera) {
         Materia materia = sistema.buscar(carrera, nombreMateria);
@@ -233,34 +274,8 @@ public class SistemaSIU {
     }
 
     /*
-     * Complejidad de cerrarMateria:
-     */
-    public void cerrarMateria(String nombreMateria, String carrera) {
-        Materia materia = sistema.buscar(carrera, nombreMateria);
-        ArrayList<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
-
-        ArrayList<NodoCarerraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
-
-        //
-        for (String alumno : conjuntoDeAlumnos) {
-            estudiantes.desinscribir(alumno);
-        }
-
-        for (NodoCarerraYMateria nycm : nombresYNodosMateria) {
-            nycm.raizCarrera().borrar(nycm.getNombreMateria());
-        }
-    }
-
-    /*
-     * Complejidad de inscriptos:
-     */
-    public int inscriptos(String nombreMateria, String carrera) {
-        Materia materia = sistema.buscar(carrera, nombreMateria);
-        return materia.getCantidadInscriptos();
-    }
-
-    /*
      * Complejidad de excedeCupo:
+     * O(|c| + |m|)
      */
     public boolean excedeCupo(String nombreMateria, String carrera) {
         Materia materia = sistema.buscar(carrera, nombreMateria);
@@ -279,6 +294,7 @@ public class SistemaSIU {
 
     /*
      * Complejidad de carreras:
+     * O(sum |c|)
      */
     public String[] carreras() {
         return sistema.getCarrerasEnOrdenLexicografico();
@@ -286,6 +302,7 @@ public class SistemaSIU {
 
     /*
      * Complejidad de materias:
+     * O(|c| + sum |m_c|)
      */
     public String[] materias(String carrera) {
         return sistema.getMateriasEnOrdenLexicografico(carrera);
@@ -293,8 +310,30 @@ public class SistemaSIU {
 
     /*
      * Complejidad de materiasInscriptas:
+     * O(1)
      */
     public int materiasInscriptas(String estudiante) {
         return estudiantes.buscar(estudiante);
     }
+
+    /*
+     * Complejidad de cerrarMateria:
+     * O(|c| + |m| + sum |n| + E_m)
+     */
+    public void cerrarMateria(String nombreMateria, String carrera) {
+        Materia materia = sistema.buscar(carrera, nombreMateria);
+        ArrayList<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
+
+        ArrayList<NodoCarerraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
+
+        //
+        for (String alumno : conjuntoDeAlumnos) {
+            estudiantes.desinscribir(alumno);
+        }
+
+        for (NodoCarerraYMateria nycm : nombresYNodosMateria) {
+            nycm.raizCarrera().borrar(nycm.getNombreMateria());
+        }
+    }
+
 }
