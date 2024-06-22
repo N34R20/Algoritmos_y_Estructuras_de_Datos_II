@@ -1,4 +1,4 @@
-# Algoritmos_y_Estructuras_de_Datos_II
+# Algoritmos y Estructuras de Datos II
 
 Este repositorio consta del material bibliografico y ejercicios de la materia Algoritmos y Estructuras de Datos II (Facultad de Ciencias Exactas UBA)
 
