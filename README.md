@@ -2,6 +2,18 @@
 
 Este repositorio consta del material bibliografico y ejercicios de la materia Algoritmos y Estructuras de Datos II (Facultad de Ciencias Exactas UBA)
 
+## Talleres
+
+## Teoricas
+
+## Practicas
+
+## Trabajos Practicos
+
+- TP1 - Especificacion y Weakest Precondition
+
+- [TP2 - Diseño e Implementacion de estructuras][Trabajos Practicos/TP1 - Especificacion y WeakestPrecondition]
+
 ## Bibliografia
 
 - https://algs4.cs.princeton.edu/home/
