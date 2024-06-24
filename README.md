@@ -2,6 +2,19 @@
 
 Este repositorio consta del material bibliografico y ejercicios de la materia Algoritmos y Estructuras de Datos II (Facultad de Ciencias Exactas UBA)
 
+## [Estructuras de Datos](/EstructurasDeDatos/)
+
+- Listas enlazadas
+- Listas Doblemente enlazadas
+- Arboles
+  - ABB
+  - AVL
+  - Balanceo de los arboles bianrios
+  - Rotaciones
+- Estructuras mas complejas
+  - Heaps y colas de prioridad
+  - Tries
+
 ## [Talleres](/Talleres/)
 
 - [taller 1 - Introduccion a Java](/Talleres/taller1%20-%20Intro%20a%20Java/)
