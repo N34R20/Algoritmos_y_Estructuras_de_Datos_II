@@ -38,7 +38,7 @@ Tres paradigmas principales:
 
 Vamos a seguir el paradigma de gestion de Java
 
-primitivas que vamos a usar:
+## primitivas que vamos a usar:
 
 - **New(Tipo)** crea un nuevo lugar en el Heap de tipo **Tipo** (para nosotros tipicamente es un aetsructura o un arreglo de algo) y devuelve una referencia al mismo para que esta se guarde en algun otro lugar (campo, slot, parametro de salida, variable auxiliar, etc.) **NewArray<>(length)** es un caso particular.
 
@@ -52,16 +52,43 @@ primitivas que vamos a usar:
 
 ## Definicion de tipos
 
+Ya dijimos que vamos a tener estrcturas y arreglos. Asi vamos a poder introducir tipos de representacion.
+
+Por ejemplo:
+
+```
+EstructuraConDatos = <dato:N, arr:Array<DatoEstructurado>>
+DatoEstructurado = <datointerno: Float, contador: N>
+```
+
+Y lo que es buenisimo: Vale hacer definiciones recursivas de tipos de representacion!
+
+Ejemplo:
+
+```
+Nodo = Struct <dato: N, pxmo: Nodo>
+```
+
 ## Representacion sobre listas encadenadas
 
+```
 Nodo = Struct <dato: \N, pxmo: Nodo>
+```
 
+```
 SetUsingLinkedList (a.k.a. SLL)
 Modulo SLL implementa Set {
 head: Nodo
+```
 
 El modulo introduce un tipo SLL que es un struc que tiene un campo head. Ademas, un modulo introduce la implementacion de las operaciones del TAD y documenta el invariante de representacion y la funcion de abstraccion
 
 ## Invariante de Represenatcion
+
+```
+Invariante de Represenatcion
+pred InvRep(sll: SLL)
+{sll!=null ^ existe l: Seq<N>.list?(l,sll.head)}
+```
 
 ## Funcion de Abstraccion
