@@ -1,7 +1,5 @@
 package aed;
 
-import aed.SistemaSIU.TrieMaterias;
-
 // Invariante de representacion de NodoCarreraYMateria:
 
 // - trieMateria es un TrieMaterias
@@ -9,11 +7,11 @@ import aed.SistemaSIU.TrieMaterias;
 // - nombreMateria es una clave valida en trieMateria
 
 public class NodoCarreraYMateria {
-    TrieMaterias trieMateria;
+    DiccionarioMaterias dictMateria;
     String nombreMateria;
 
-    public NodoCarreraYMateria(TrieMaterias trieMateria, String nombreMateria) {
-        this.trieMateria = trieMateria;
+    public NodoCarreraYMateria(DiccionarioMaterias dictMateria, String nombreMateria) {
+        this.dictMateria = dictMateria;
         this.nombreMateria = nombreMateria;
     }
 
@@ -21,7 +19,7 @@ public class NodoCarreraYMateria {
         return this.nombreMateria;
     }
 
-    public TrieMaterias raizCarrera() {
-        return this.trieMateria;
+    public DiccionarioMaterias raizCarrera() {
+        return this.dictMateria;
     }
 }

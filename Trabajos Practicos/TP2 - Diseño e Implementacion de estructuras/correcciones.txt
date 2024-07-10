@@ -1,0 +1,30 @@
+CORRECCIONES
+------------
+
+
+1. Abstraccion 
+
+	/- Separar TODAS las clases en distintos archivos -> Hecho 
+
+	
+2. Invarinates
+
+	- escribir el invariante de SistemaSIU
+	
+	- El orden NO es parte del Invariante
+
+	- Pueden las materias tener carreras que no esten en el sistema?
+
+	- Los predicados de la estrcturas que ya lo cumplen las estructuras que forman a la meta estructura no hacen falta ponerlas
+
+3. Ordenes
+
+	- agregar a un arrayList no es O(1), porque hay que redimensionar
+
+	- Opcion 1: Usar una Lista enlazada (doble) -> agregar atras y cuando se va printeando empezamos desde el principio
+
+	- Para el sort:
+		
+		- O ya esta sortado desde el cominezo 
+		
+		- O elejimos un sort que sea O(1)
