@@ -25,6 +25,7 @@ public class Materia {
         this.cantidadInscriptos = cantidadInscriptos;
         this.plantelDocente = plantelDocente;
         this.conjuntoAlumnos = new ArrayList<String>();
+        // Cambiar por trie
         this.nombresYNodos = new ArrayList<NodoCarreraYMateria>();
 
     }

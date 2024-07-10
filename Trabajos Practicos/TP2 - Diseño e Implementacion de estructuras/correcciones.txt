@@ -28,3 +28,54 @@ CORRECCIONES
 		- O ya esta sortado desde el cominezo 
 		
 		- O elejimos un sort que sea O(1)
+
+
+Hola Francisco. Te describo mejor los errores.
+Avisame si necesitan y hacemos un meet para el lunes o el fin de semana
+----
+Principalmente:
+
+- Muy mal los invariantes
+
+Invariantes:
+
+- No tienen que chequear lo que ya hacen las estructuras de abajo
+- Muy incompleto. Pueden las materias tener carreras que no estén en el
+sistema ?
+- El orden no es parte del invariante
+-- Ponen en el invariante sentencias que ya se deberían cumplir por las otras
+capas, como decir que un Trie es un Trie en Sistema.... (eso ya es de Trie). O
+decir que hay un acceso en O(1), eso no dice nada de la estructura, no es parte
+del invariante.
+- En TrieMaterias, Decir que algo que es Trie<Materia>, decir que almacena
+Materias.... eso ya está, no hay otra posibilidad...
+- SistemaSIU no le pusieron invariante. Y es el más interesante
+- Cosas parecidas en el resto de los módulos.
+
+- No cumplen ordenes (fundamentalmente por utilizar arraylists), pero bien el
+general
+
+--- Fíjense que getCarrerasOrdenLexicográfico por ejemplo (creo que había en
+otros lugares, como en agregar carreras en la materia) que para generar la
+salida van agregando en un ArrayList. Eso no funciona porque van
+redimensionando. Ayuda: Utilizan la propiedad que sea un Array ?
+
+- Tienen una muy mala abstracción. (esto, dada la cantidad de cosas, se las
+dejo para que aprendan, optativas)
+--- Tener todo junto en un solo archivo no está bueno
+Además
+- TrieEstudiante y TrieCarrera NO son tries, son Diccionarios ! O sea, los
+implementás como tries. Ahí tienen 2 opciones (una buena y la otra mala pero
+mejor que lo actual). 1) - Buena. Hacer un conjunto e implementarlo sobre Trie.
+2)- Mala, pero mejor. Al menos llamarlo conjunto y no TrieXXXX
+
+
+Otros:
+- Al utilizar arraylists en getCarrerasOrdenLexicográfico, no te dan los
+ordenes porque ese agregar no es O(1) (línea 150 de sistema)
+- Sort ya te rompe los órdenes
+ --- Esto está bastante claro...
+Ojo, no cambia como implementan el trie (que no hacen crecer los arrays), sino
+cuando hacen OrdenLexicográfico, que va agregando...
+
+
