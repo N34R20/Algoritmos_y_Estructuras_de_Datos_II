@@ -11,9 +11,6 @@ public class DiccionarioEstudiante extends Trie<Integer> {
 
     // Invariante de Representacion de TrieEstudiante:
 
-    // - Es un Trie
-    // - Acceso a claves en O(1), pues para toda clave su largo nunca es mayor a 7
-    // osea que esta acotada.
     // - los valores de tods las claves son enteros >= 0
 
     // Constructor

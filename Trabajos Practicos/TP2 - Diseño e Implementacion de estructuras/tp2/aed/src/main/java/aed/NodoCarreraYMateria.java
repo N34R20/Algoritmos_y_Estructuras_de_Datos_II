@@ -2,8 +2,6 @@ package aed;
 
 // Invariante de representacion de NodoCarreraYMateria:
 
-// - trieMateria es un TrieMaterias
-// - nombreMateria es un String
 // - nombreMateria es una clave valida en trieMateria
 
 public class NodoCarreraYMateria {

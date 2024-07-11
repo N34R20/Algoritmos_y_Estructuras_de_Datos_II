@@ -70,7 +70,8 @@ public class Trie<T> {
         // chequeas el caso base: donde podes haber llegado a un nodo que es el final de
         // una palabra
         // pero ademas tiene hijos porque siguiendo los hijos es la clave de otro valor
-        if (!actual.hijos.isEmpty()) {
+
+        if (actual.cantidadHijos == 0) {
             actual.data = null;
             actual.esFinPalabra = false;
         } else {
@@ -86,7 +87,7 @@ public class Trie<T> {
             // (mientras no haya una bifurcacion, cuando se distinguen las claves,
             // no es un nodo compartido con otra palabra)
             // y mientras el padre no tenga asociada una materia
-            while (padre.hijos.size() == 1 && padre.data == null) {
+            while (padre.cantidadHijos == 1 && padre.data == null) {
 
                 // el padre mata a un hijo especifico a lo Cronos
                 padre.killChild(caracteres[clave.length() - i]);
@@ -110,6 +111,7 @@ public class Trie<T> {
         ArrayList<TrieNode> hijos;
         boolean esFinPalabra;
         T data;
+        int cantidadHijos;
 
         // constructor:
         // ------------
@@ -121,35 +123,38 @@ public class Trie<T> {
         // se le agrega el dato que que sera el valor de la clave
         // y conserva un puntero hacia su nodo padre.
         public TrieNode(char valor, TrieNode padre) {
+            // valor ya no tiene mucho sentido
             this.valor = valor;
-            this.hijos = new ArrayList<TrieNode>();
+            this.hijos = new ArrayList<TrieNode>(256);
             this.esFinPalabra = false;
             this.data = null;
             this.padre = padre;
+            this.cantidadHijos = 0;
         }
 
         // recorre la lista de hijos de un determinado nodo que esta acotada por la
         // cantidad caracteres ASCI hasta encontrar el que le pedimos
         // en el peor caso no lo encuentra y devuelve null
         public TrieNode getChild(char c) {
-            for (TrieNode hijo : hijos) {
-                if (hijo.valor == c) {
-                    return hijo;
-                }
+            if (!this.hijos.isEmpty()) {
+                return null;
+
+            } else {
+                TrieNode hijo = hijos.get((int) c);
+                return hijos.get((int) c);
             }
-            return null;
         }
 
         public TrieNode addChild(char c) {
             // Verificar si ya existe un hijo con el valor 'c'
-            for (TrieNode hijo : hijos) {
-                if (hijo.valor == c) {
-                    // Si ya existe, retornar ese nodo en lugar de crear uno nuevo
-                    return hijo;
-                }
+            if (hijos.get((int) c) != null) {
+                // Si ya existe, retornar ese nodo en lugar de crear uno nuevo
+                return hijos.get((int) c);
             }
+
             TrieNode nuevoHijo = new TrieNode(c, this);
-            hijos.add(nuevoHijo);
+            hijos.set((int) c, nuevoHijo);
+            this.cantidadHijos += 1;
             return nuevoHijo;
         }
 
@@ -158,11 +163,8 @@ public class Trie<T> {
         }
 
         public void killChild(char valorHijo) {
-            for (int i = 0; i < hijos.size(); i++) {
-                if (hijos.get(i).valor == valorHijo) {
-                    hijos.remove(i);
-                    return;
-                }
+            if ((hijos.get((int) valorHijo) != null)) {
+                hijos.set((int) valorHijo, null);
             }
         }
     }

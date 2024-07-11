@@ -61,8 +61,10 @@ public class SistemaSIU {
             Materia materia = new Materia(0, plantelDocente);
 
             for (ParCarreraMateria pcm : paresCarreraMateria) {
+
                 String nombreMateria = pcm.getNombreMateria();
                 String carrera = pcm.getCarrera();
+
                 sistema.insertar(carrera, nombreMateria, materia);
 
                 DiccionarioMaterias TrieMateria = sistema.getTrieMateriaForCarrera(carrera);
@@ -247,13 +249,18 @@ public class SistemaSIU {
      */
     public void cerrarMateria(String nombreMateria, String carrera) {
         Materia materia = sistema.buscar(carrera, nombreMateria);
-        ArrayList<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
+        ListaEnlazada<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
 
         ArrayList<NodoCarreraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
 
         //
-        for (String alumno : conjuntoDeAlumnos) {
+        Iterador<String> it = conjuntoDeAlumnos.iterador();
+
+        while (it.haySiguiente() == true) {
+            // Código a ejecutar en cada iteración
+            String alumno = it.siguiente();
             estudiantes.desinscribir(alumno);
+
         }
 
         for (NodoCarreraYMateria nycm : nombresYNodosMateria) {
