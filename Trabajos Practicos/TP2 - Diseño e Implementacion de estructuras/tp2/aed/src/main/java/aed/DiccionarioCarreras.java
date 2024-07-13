@@ -1,6 +1,7 @@
 package aed;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 // Invariante de Representacion de TrieCarreras:
 
@@ -18,7 +19,7 @@ public class DiccionarioCarreras extends Trie<DiccionarioMaterias> {
         public TrieNodoCarrera(char valor) {
             this.valor = valor;
             this.dictMaterias = new DiccionarioMaterias();
-            this.hijos = new ArrayList<TrieNodoCarrera>(256);
+            this.hijos = new ArrayList<TrieNodoCarrera>(Collections.nCopies(256, (TrieNodoCarrera) null));
             this.esFinPalabra = false;
         }
 

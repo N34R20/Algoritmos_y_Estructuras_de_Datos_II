@@ -1,6 +1,7 @@
 package aed;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 // Clase Trie<T> generica donde puede almacenar cualquier valor, posteriormente las clases que hacen al sistema son extensiones de este Trie<T>
 
@@ -15,6 +16,71 @@ import java.util.ArrayList;
 // puede tener ambos.   
 
 public class Trie<T> {
+
+    public class TrieNode {
+        char valor;
+        TrieNode padre;
+        ArrayList<TrieNode> hijos;
+        boolean esFinPalabra;
+        T data;
+        int cantidadHijos;
+
+        // constructor:
+        // ------------
+        //
+        // el valor de cada nodo, va a ser un caracter especifico
+        // un atributo booleano que es true si es el ultimo nodo de una clave completa
+        // la data que en principio esta vacio pero en caso de ser el final de la
+        // palabra
+        // se le agrega el dato que que sera el valor de la clave
+        // y conserva un puntero hacia su nodo padre.
+        public TrieNode(char valor, TrieNode padre) {
+            // valor ya no tiene mucho sentido
+            this.valor = valor;
+            this.hijos = new ArrayList<>(Collections.nCopies(256, (TrieNode) null));
+            this.esFinPalabra = false;
+            this.data = null;
+            this.padre = padre;
+            this.cantidadHijos = 0;
+
+        }
+
+        // recorre la lista de hijos de un determinado nodo que esta acotada por la
+        // cantidad caracteres ASCI hasta encontrar el que le pedimos
+        // en el peor caso no lo encuentra y devuelve null
+        public TrieNode getChild(char c) {
+            if (!this.hijos.isEmpty()) {
+                return null;
+
+            } else {
+                TrieNode hijo = hijos.get((int) c);
+                return hijo;
+            }
+        }
+
+        public TrieNode addChild(char c) {
+            // Verificar si ya existe un hijo con el valor 'c'
+            if (hijos.get((int) c) != null) {
+                // Si ya existe, retornar ese nodo en lugar de crear uno nuevo
+                return hijos.get((int) c);
+            }
+
+            TrieNode nuevoHijo = new TrieNode(c, this);
+            hijos.set((int) c, nuevoHijo);
+            this.cantidadHijos += 1;
+            return nuevoHijo;
+        }
+
+        public TrieNode getFather() {
+            return this.padre;
+        }
+
+        public void killChild(char valorHijo) {
+            if ((hijos.get((int) valorHijo) != null)) {
+                hijos.set((int) valorHijo, null);
+            }
+        }
+    }
 
     private final TrieNode raiz;
 
@@ -103,70 +169,6 @@ public class Trie<T> {
     // devuelve la raiz del Trie
     public TrieNode getRoot() {
         return raiz;
-    }
-
-    public class TrieNode {
-        char valor;
-        TrieNode padre;
-        ArrayList<TrieNode> hijos;
-        boolean esFinPalabra;
-        T data;
-        int cantidadHijos;
-
-        // constructor:
-        // ------------
-        //
-        // el valor de cada nodo, va a ser un caracter especifico
-        // un atributo booleano que es true si es el ultimo nodo de una clave completa
-        // la data que en principio esta vacio pero en caso de ser el final de la
-        // palabra
-        // se le agrega el dato que que sera el valor de la clave
-        // y conserva un puntero hacia su nodo padre.
-        public TrieNode(char valor, TrieNode padre) {
-            // valor ya no tiene mucho sentido
-            this.valor = valor;
-            this.hijos = new ArrayList<TrieNode>(256);
-            this.esFinPalabra = false;
-            this.data = null;
-            this.padre = padre;
-            this.cantidadHijos = 0;
-        }
-
-        // recorre la lista de hijos de un determinado nodo que esta acotada por la
-        // cantidad caracteres ASCI hasta encontrar el que le pedimos
-        // en el peor caso no lo encuentra y devuelve null
-        public TrieNode getChild(char c) {
-            if (!this.hijos.isEmpty()) {
-                return null;
-
-            } else {
-                TrieNode hijo = hijos.get((int) c);
-                return hijos.get((int) c);
-            }
-        }
-
-        public TrieNode addChild(char c) {
-            // Verificar si ya existe un hijo con el valor 'c'
-            if (hijos.get((int) c) != null) {
-                // Si ya existe, retornar ese nodo en lugar de crear uno nuevo
-                return hijos.get((int) c);
-            }
-
-            TrieNode nuevoHijo = new TrieNode(c, this);
-            hijos.set((int) c, nuevoHijo);
-            this.cantidadHijos += 1;
-            return nuevoHijo;
-        }
-
-        public TrieNode getFather() {
-            return this.padre;
-        }
-
-        public void killChild(char valorHijo) {
-            if ((hijos.get((int) valorHijo) != null)) {
-                hijos.set((int) valorHijo, null);
-            }
-        }
     }
 
 }
