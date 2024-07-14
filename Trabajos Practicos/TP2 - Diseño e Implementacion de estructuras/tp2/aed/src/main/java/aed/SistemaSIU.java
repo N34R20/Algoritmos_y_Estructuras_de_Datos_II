@@ -66,9 +66,7 @@ public class SistemaSIU {
                 String carrera = pcm.getCarrera();
 
                 sistema.insertar(carrera, nombreMateria, materia);
-
-                DiccionarioMaterias TrieMateria = sistema.getTrieMateriaForCarrera(carrera);
-
+                DiccionarioMaterias TrieMateria = sistema.buscar(carrera);
                 NodoCarreraYMateria nycm = new NodoCarreraYMateria(TrieMateria, nombreMateria);
                 materia.addNombresYNodos(nycm);
 
@@ -95,7 +93,7 @@ public class SistemaSIU {
      */
     public void inscribir(String estudiante, String carrera, String nombreMateria) {
         estudiantes.inscribir(estudiante);
-        Materia materia = sistema.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         materia.addConjuntoAlumnos(estudiante);
 
     }
@@ -108,7 +106,7 @@ public class SistemaSIU {
      * que cuesta el largo de carerra y el largo de materia
      */
     public int inscriptos(String nombreMateria, String carrera) {
-        Materia materia = sistema.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         return materia.getCantidadInscriptos();
     }
 
@@ -121,7 +119,7 @@ public class SistemaSIU {
      */
     public void agregarDocente(CargoDocente cargo, String carrera, String nombreMateria) {
 
-        Materia materia = sistema.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         materia.incrementarCargo(cargo);
     }
 
@@ -134,7 +132,7 @@ public class SistemaSIU {
      * accede en O(1)
      */
     public int[] plantelDocente(String nombreMateria, String carrera) {
-        Materia materia = sistema.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         return materia.getPlantelDocente();
 
     }
@@ -151,7 +149,7 @@ public class SistemaSIU {
      * 
      */
     public boolean excedeCupo(String nombreMateria, String carrera) {
-        Materia materia = sistema.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         int[] plantel = materia.getPlantelDocente();
         int cantInscriptos = materia.getCantidadInscriptos();
         boolean res = false;
@@ -179,7 +177,7 @@ public class SistemaSIU {
      * 
      */
     public String[] carreras() {
-        return sistema.getCarrerasEnOrdenLexicografico();
+        return sistema.getClavesEnOrdenLexicografico();
     }
 
     /*
@@ -199,7 +197,8 @@ public class SistemaSIU {
      * 
      */
     public String[] materias(String carrera) {
-        return sistema.getMateriasEnOrdenLexicografico(carrera);
+        DiccionarioMaterias materias = sistema.buscar(carrera);
+        return materias.getClavesEnOrdenLexicografico();
     }
 
     /*
@@ -248,7 +247,7 @@ public class SistemaSIU {
      * 
      */
     public void cerrarMateria(String nombreMateria, String carrera) {
-        Materia materia = sistema.buscar(carrera, nombreMateria);
+        Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         ListaEnlazada<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
 
         ArrayList<NodoCarreraYMateria> nombresYNodosMateria = materia.getNombresYNodos();

@@ -37,7 +37,7 @@ public class Trie<T> {
         public TrieNode(char valor, TrieNode padre) {
             // valor ya no tiene mucho sentido
             this.valor = valor;
-            this.hijos = new ArrayList<>(Collections.nCopies(256, (TrieNode) null));
+            this.hijos = new ArrayList<TrieNode>(Collections.nCopies(256, (TrieNode) null));
             this.esFinPalabra = false;
             this.data = null;
             this.padre = padre;
@@ -49,13 +49,8 @@ public class Trie<T> {
         // cantidad caracteres ASCI hasta encontrar el que le pedimos
         // en el peor caso no lo encuentra y devuelve null
         public TrieNode getChild(char c) {
-            if (!this.hijos.isEmpty()) {
-                return null;
-
-            } else {
-                TrieNode hijo = hijos.get((int) c);
-                return hijo;
-            }
+            TrieNode hijo = hijos.get((int) c);
+            return hijo;
         }
 
         public TrieNode addChild(char c) {
@@ -78,7 +73,16 @@ public class Trie<T> {
         public void killChild(char valorHijo) {
             if ((hijos.get((int) valorHijo) != null)) {
                 hijos.set((int) valorHijo, null);
+                this.cantidadHijos--;
             }
+        }
+
+        public T getData() {
+            return data;
+        }
+
+        public void setData(T newData) {
+            this.data = newData;
         }
     }
 
@@ -103,7 +107,8 @@ public class Trie<T> {
             actual = hijo;
         }
         actual.esFinPalabra = true;
-        actual.data = data;
+        // actual.data = data;
+        actual.setData(data);
     }
 
     // Desde la raiz vas caracter por caracter del input palabra
@@ -137,7 +142,7 @@ public class Trie<T> {
         // una palabra
         // pero ademas tiene hijos porque siguiendo los hijos es la clave de otro valor
 
-        if (actual.cantidadHijos == 0) {
+        if (actual.cantidadHijos == 1) {
             actual.data = null;
             actual.esFinPalabra = false;
         } else {
@@ -164,6 +169,37 @@ public class Trie<T> {
             padre.killChild(caracteres[clave.length() - i]);
         }
 
+    }
+
+    public String[] getClavesEnOrdenLexicografico() {
+        // creamos un ArrayList vacio que guardara el resultado final
+        ListaEnlazada<String> conjClaves = new ListaEnlazada<>();
+
+        obtenerClaves(raiz, "", conjClaves);
+
+        String[] resultado = new String[conjClaves.longitud()];
+        Iterador<String> it = conjClaves.iterador();
+
+        for (int i = 0; it.haySiguiente() == true; i++) {
+            // Código a ejecutar en cada iteración
+            String siguiente = it.siguiente();
+            resultado[i] = siguiente;
+
+        }
+
+        return resultado;
+    }
+
+    private void obtenerClaves(Trie<T>.TrieNode nodo, String prefijo, ListaEnlazada<String> resultado) {
+        if (nodo.esFinPalabra) {
+            resultado.agregarAtras(prefijo);
+        }
+
+        for (Trie<T>.TrieNode hijo : nodo.hijos) {
+            if (hijo != null) {
+                obtenerClaves(hijo, prefijo + hijo.valor, resultado);
+            }
+        }
     }
 
     // devuelve la raiz del Trie

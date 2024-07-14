@@ -21,7 +21,7 @@ public class DiccionarioEstudiante extends Trie<Integer> {
     // Método para inscribir y sumar 1 al valor existente de la clave
     public void inscribir(String clave) {
         Integer valorActual = this.buscar(clave);
-        if (valorActual != 0) {
+        if (valorActual != null) {
             this.insertar(clave, valorActual + 1);
         } else {
             this.insertar(clave, 1);
