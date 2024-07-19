@@ -2,7 +2,6 @@ package aed;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
 
 // Clase Trie<T> generica donde puede almacenar cualquier valor, posteriormente las clases que hacen al sistema son extensiones de este Trie<T>
 
@@ -175,52 +174,72 @@ public class Trie<T> {
     }
 
     public String[] getClavesEnOrdenLexicografico() {
-        // creamos un ArrayList vacio que guardara el resultado final
-        ListaEnlazada<String> conjClaves = new ListaEnlazada<>();
-        StringBuilder palabra = new StringBuilder();
-        Stack<String> pila = new Stack<String>();
 
-        obtenerClaves(raiz, palabra, pila, conjClaves);
+        StringBuilder palabra = new StringBuilder(); // O(1)
+        ListaEnlazada<String> stack = new ListaEnlazada<String>(); // O(1)
+        ListaEnlazada<String> conjClaves = new ListaEnlazada<>(); // O(1)
 
-        String[] resultado = new String[conjClaves.longitud()];
-        Iterador<String> it = conjClaves.iterador();
+        // la funcion recursiva recibe 4 inputs:
+        // la raiz del Trie al que queremos recorrer.
+        // un StringBuilder con el que formaremos las palabras, en principio vacio.
+        // Una ListaEnlazada que funciona como stack para ir apilando los prefijos de
+        // las palabras que comparten prefijo.
+        // El conjunto Final de las claves del Diccionario que sera el output de la
+        // funcion.
 
-        for (int i = 0; it.haySiguiente() == true; i++) {
+        obtenerClaves(raiz, palabra, stack, conjClaves);
 
-            String siguiente = it.siguiente();
-            resultado[i] = siguiente;
+        String[] resultado = new String[conjClaves.longitud()]; // O(1)
+        Iterador<String> it = conjClaves.iterador(); // O(1)
+
+        for (int i = 0; it.haySiguiente() == true; i++) { // O(|conjClaves|)
+
+            String siguiente = it.siguiente(); // O(1)
+            resultado[i] = siguiente; // O(1)
 
         }
 
         return resultado;
     }
 
-    private void obtenerClaves(Trie<T>.TrieNode nodo, StringBuilder prefijo, Stack<String> pila,
+    private void obtenerClaves(Trie<T>.TrieNode nodo, StringBuilder prefijo, ListaEnlazada<String> pila,
             ListaEnlazada<String> resultado) {
 
+        // Si el nodo en el que estamos parados tiene >1 hijos significa que muchas
+        // claves comparten el prefijo formado por el camino hasta ese nodo
+        // como cantidad de hijos tenga, apilamos el prefijo en la pila
         if (nodo.cantidadHijos > 1) {
-            for (int i = 1; i < nodo.cantidadHijos; i++) {
-                pila.push(prefijo.toString());
+            for (int i = 1; i < nodo.cantidadHijos; i++) { // O(256) == O(1)
+                pila.agregarAdelante(prefijo.toString()); // O(1)
             }
-
         }
+
+        // Si el nodo es fin de palabra hay que agregrarla al resultado final
         if (nodo.esFinPalabra) {
-            resultado.agregarAtras(prefijo.toString());
+            resultado.agregarAtras(prefijo.toString()); // O(1)
+
+            // Si ademas no tiene hijos es que es el final de un camino, borramos el prefijo
+            // que estabamos generando
             if (nodo.cantidadHijos == 0) {
-                prefijo.setLength(0);
+                prefijo.setLength(0); // O(1)
             }
         }
 
-        for (Trie<T>.TrieNode hijo : nodo.hijos) {
+        // recorremos al Trie de forma recursiva y entramos en los hijos si estos no son
+        // nulos
+        for (Trie<T>.TrieNode hijo : nodo.hijos) { // O(256) == O(1)
             if (hijo != null) {
 
-                if (nodo.cantidadHijos > 1 && !pila.empty() && prefijo.isEmpty()) {
-                    prefijo.append(pila.pop());
+                // si estamos en un nodo que tiene > 1 hijos y la pila no esta vacia y el
+                // prefijo fue previamente eliminado
+                // siginifica que tenemos que usar lo que hayamos apilado la ultima vez
+                if (nodo.cantidadHijos > 1 && pila.longitud() != 0 && prefijo.isEmpty()) {
+                    prefijo.append(pila.pop()); // O(1)
                 }
 
-                prefijo.append(hijo.valor);
+                prefijo.append(hijo.valor); // O(1)
 
-                obtenerClaves(hijo, prefijo, pila, resultado);
+                obtenerClaves(hijo, prefijo, pila, resultado); // O(c)
             }
         }
 

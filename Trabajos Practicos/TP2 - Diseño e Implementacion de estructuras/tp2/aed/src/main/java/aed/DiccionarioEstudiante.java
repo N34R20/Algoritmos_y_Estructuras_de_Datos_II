@@ -3,14 +3,9 @@ package aed;
 
 // - los valores de todos las claves son enteros >= 0
 
-public class DiccionarioEstudiante extends Trie<Integer> {
+// - 
 
-    enum CargoDocente {
-        AY2,
-        AY1,
-        JTP,
-        PROF
-    }
+public class DiccionarioEstudiante extends Trie<Integer> {
 
     // Constructor
     public DiccionarioEstudiante() {

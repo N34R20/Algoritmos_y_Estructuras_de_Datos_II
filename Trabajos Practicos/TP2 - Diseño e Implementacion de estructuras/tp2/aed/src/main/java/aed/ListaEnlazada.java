@@ -73,6 +73,14 @@ public class ListaEnlazada<T> implements Secuencia<T> {
         return actual.valor;
     }
 
+    public T pop() {
+        Nodo primero = this.primero;
+        T res = primero.valor;
+        eliminar(0);
+        return res;
+
+    }
+
     public void eliminar(int i) {
         if (primero == null && ultimo == null) {
             /* es qeuivalente a no hacer nada o skip */;

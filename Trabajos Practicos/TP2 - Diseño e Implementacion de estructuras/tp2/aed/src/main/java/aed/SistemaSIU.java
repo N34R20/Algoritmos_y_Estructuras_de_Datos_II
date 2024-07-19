@@ -4,7 +4,16 @@ import java.util.ArrayList;
 
 // Invariante de SistemaSIU
 
-// 
+// estudiante es una instancia valida de DiccionarioEstudiante
+// sistema es una instancia valida de DiccionarioCarrera
+
+// Toda clave de una instancia de estudiantes esta en el conjAlumnos de alguna materia en el DiccionariosMateria
+
+// la union de el conjAlumnos (union de conjuntos no admite repetidos) de cada materia 
+// que sea un valor del DiccionarioCarrera es igual al conjunto de todas las claves de estudiantes
+
+// En conjPunterosYClavesMateria todos las referencias a los DiccionariosMateria son una instancia valida para algun valor de DiccionarioCarrea
+// y el nombreMateria es una clave valida para el Diccionario al cual guarda la referencia
 
 public class SistemaSIU {
 
