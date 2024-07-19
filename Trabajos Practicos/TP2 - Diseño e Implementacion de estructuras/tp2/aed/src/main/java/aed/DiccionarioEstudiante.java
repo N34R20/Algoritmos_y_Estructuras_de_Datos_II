@@ -1,9 +1,8 @@
 package aed;
-// Invariante de Representacion de TrieEstudiante:
+// Invariante de Representacion de DiccionarioEstudiante:
 
-// - los valores de todos las claves son enteros >= 0
-
-// - 
+// los valores de todos las claves son enteros >= 0
+// cumple el invariante de Trie
 
 public class DiccionarioEstudiante extends Trie<Integer> {
 

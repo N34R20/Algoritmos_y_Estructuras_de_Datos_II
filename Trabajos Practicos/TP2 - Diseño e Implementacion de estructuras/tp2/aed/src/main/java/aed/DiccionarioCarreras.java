@@ -3,6 +3,7 @@ package aed;
 // Invariante de Representacion de TrieCarreras:
 
 // Los valores que almacenan son instancias validas de DiccionarioMateria
+// cumple el invariante de Trie
 
 public class DiccionarioCarreras extends Trie<DiccionarioMaterias> {
 

@@ -6,11 +6,12 @@ import java.util.Collections;
 // Clase Trie<T> generica donde puede almacenar cualquier valor, posteriormente las clases que hacen al sistema son extensiones de este Trie<T>
 
 // Invariante de Representacion:
+// -----------------------------
 
 // - Existe un nodo del Trie que es raiz y este no tiene padre ni almacena nigun valor
-// - Cada nodo tiene un hijo, este es un nodo tambien
+// - Cada nodo tiene un padre, este es un nodo tambien salvo la raiz
 // - Si un nodo tiene valor true respecto a esFinPalabra existe una secuencia unica de nodos que representan el valor del nodo actual
-// - Cada nodo tiene o valor(caracter) o significado(dato), pero no niguno puede tener ambos.  
+// - Cada nodo tiene o esFinPalabra == true o tiene hijos. ( no es excluyente )  
 // cantidadHijos >= 0 y es igual a la cantidad de posiciones no nulas del array hijos.
 
 public class Trie<T> {

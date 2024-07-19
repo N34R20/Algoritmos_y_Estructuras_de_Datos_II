@@ -2,14 +2,19 @@ package aed;
 
 import java.util.ArrayList;
 
-// Invariante de SistemaSIU
+// Invariante de SistemaSIU:
+// -------------------------
 
 // estudiante es una instancia valida de DiccionarioEstudiante
 // sistema es una instancia valida de DiccionarioCarrera
 
 // Toda clave de una instancia de estudiantes esta en el conjAlumnos de alguna materia en el DiccionariosMateria
+// Si eso sucede es porque el valor de dicho estudiante es > 1.
 
-// la union de el conjAlumnos (union de conjuntos no admite repetidos) de cada materia 
+// El valor de un estudiante es el total de materias a las que esta inscripto y eso es igual a la cantidad de veces que aparece en los conjuntoAlumnos
+// de todas las instancias materias en el sistema 
+
+// la union de el conjuntoAlumnos (union de conjuntos no admite repetidos) de cada materia 
 // que sea un valor del DiccionarioCarrera es igual al conjunto de todas las claves de estudiantes
 
 // En conjPunterosYClavesMateria todos las referencias a los DiccionariosMateria son una instancia valida para algun valor de DiccionarioCarrea

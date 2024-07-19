@@ -1,6 +1,11 @@
 package aed;
 
-// Invariante de ListaDoblementeEnlazada
+// Invariante de ListaDoblementeEnlazada:
+
+// Si un nodo no es ni primero ni ultimo tiene un valor no nulo tanto como para siguiente como para anterior.
+// El anterior de primero y el siguiente de ultimo simpre van a ser nulos.
+// longuitud siempre es un entre >= 0 
+// Si longitud = 1, primero y ultimo es el mismo nodo
 
 public class ListaEnlazada<T> implements Secuencia<T> {
     // Completar atributos privados

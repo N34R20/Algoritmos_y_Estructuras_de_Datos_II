@@ -2,7 +2,8 @@ package aed;
 
 // Invariante de representacion de NodoCarreraYMateria:
 
-// - nombreMateria es una clave valida en trieMateria
+// - dictMateria es un valor de DiccionarioCarrera
+// - nombreMateria es una clave valida en dictMateria para cada par nombreMateria y dictMateria
 
 public class ReferenciaADiccionarioYClave {
     DiccionarioMaterias dictMateria;

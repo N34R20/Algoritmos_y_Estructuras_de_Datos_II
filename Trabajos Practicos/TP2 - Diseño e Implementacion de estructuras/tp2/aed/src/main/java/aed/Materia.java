@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import aed.SistemaSIU.CargoDocente;
 
-// Inavriante de representacion de Materia:
+// Invariante de representacion de Materia:
 
 // - cantidadInscriptos >= 0
 // - |plantelDocente| = 4 y para todo i natural,
 // si i esta en rango entonces planetlDocente[i] >=0
 // - cantidadInscriptos = |conjuntoAlumnos|
 // - Cada elemento de conjuntoAlumnos es una 
-// clave valida (existente) en la instancia de DiccionarioEstudiante
+// clave valida (existente) en la instancia de DiccionarioEstudiante 
+// Los punteros que aparecen en conjPunterosYClavesMateria apuntan a un Diccionario que es un valor de una instancia valida DiccionarioCarrera
 // - |conjPunterosYClavesMateria| <= cantidad de claves en DiccionarioCarreras
 
 public class Materia {
