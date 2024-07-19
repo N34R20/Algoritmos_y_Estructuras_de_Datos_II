@@ -176,6 +176,10 @@ public class Trie<T> {
     public String[] getClavesEnOrdenLexicografico() {
 
         StringBuilder palabra = new StringBuilder(); // O(1)
+        // usamos una ListaEnlazada para que sirva como Stack para cumplir los ordenes
+        // pero no es propiamente un stack.
+        // nos aprovechamos de que se puede agregar adelante y sacar el primer elemento
+        // pero un Stack no podria agregarAtras no sacar un elemento i del conjunto.
         ListaEnlazada<String> stack = new ListaEnlazada<String>(); // O(1)
         ListaEnlazada<String> conjClaves = new ListaEnlazada<>(); // O(1)
 
