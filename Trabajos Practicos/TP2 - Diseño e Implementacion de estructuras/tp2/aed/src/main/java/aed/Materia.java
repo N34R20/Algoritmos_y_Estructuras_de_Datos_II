@@ -11,22 +11,22 @@ import aed.SistemaSIU.CargoDocente;
 // si i esta en rango entonces planetlDocente[i] >=0
 // - cantidadInscriptos = |conjuntoAlumnos|
 // - Cada elemento de conjuntoAlumnos es una 
-// clave valida (existente) en la instancia de TrieEstudiante
-// - |nombres| = |nombresYNodos|
+// clave valida (existente) en la instancia de DiccionarioEstudiante
+// - |conjPunterosYClavesMateria| <= cantidad de claves en DiccionarioCarreras
 
 public class Materia {
 
     private int cantidadInscriptos;
     private int[] plantelDocente;
     private ListaEnlazada<String> conjuntoAlumnos;
-    private ArrayList<NodoCarreraYMateria> DictYNombres;
+    private ArrayList<ReferenciaADiccionarioYClave> conjPunterosYClavesMateria;
 
     public Materia(int cantidadInscriptos, int[] plantelDocente) {
         this.cantidadInscriptos = cantidadInscriptos;
         this.plantelDocente = plantelDocente;
         this.conjuntoAlumnos = new ListaEnlazada<String>();
         // Cambiar por trie
-        this.DictYNombres = new ArrayList<NodoCarreraYMateria>();
+        this.conjPunterosYClavesMateria = new ArrayList<ReferenciaADiccionarioYClave>();
 
     }
 
@@ -55,12 +55,12 @@ public class Materia {
         setCantidadInscriptos(this.cantidadInscriptos + 1);
     }
 
-    public ArrayList<NodoCarreraYMateria> getNombresYNodos() {
-        return DictYNombres;
+    public ArrayList<ReferenciaADiccionarioYClave> getNombresYNodos() {
+        return conjPunterosYClavesMateria;
     }
 
-    public void addNombresYNodos(NodoCarreraYMateria ncym) {
-        this.DictYNombres.add(ncym);
+    public void addNombresYNodos(ReferenciaADiccionarioYClave ncym) {
+        this.conjPunterosYClavesMateria.add(ncym);
     }
 
     public void incrementarCargo(CargoDocente cargo) {

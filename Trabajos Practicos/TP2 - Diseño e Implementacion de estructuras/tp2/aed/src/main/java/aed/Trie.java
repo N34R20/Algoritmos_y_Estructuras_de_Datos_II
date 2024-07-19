@@ -2,6 +2,7 @@ package aed;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
 
 // Clase Trie<T> generica donde puede almacenar cualquier valor, posteriormente las clases que hacen al sistema son extensiones de este Trie<T>
 
@@ -9,11 +10,9 @@ import java.util.Collections;
 
 // - Existe un nodo del Trie que es raiz y este no tiene padre ni almacena nigun valor
 // - Cada nodo tiene un hijo, este es un nodo tambien
-// - Si un nodo tiene valor true respecto a esFinPalabra
-// existe una secuencia unica de nodos que representan 
-// el valor del nodo actual
-// - Cada nodo tiene o valor(caracter) o significado(dato), pero no niguno
-// puede tener ambos.   
+// - Si un nodo tiene valor true respecto a esFinPalabra existe una secuencia unica de nodos que representan el valor del nodo actual
+// - Cada nodo tiene o valor(caracter) o significado(dato), pero no niguno puede tener ambos.  
+// cantidadHijos >= 0 y es igual a la cantidad de posiciones no nulas del array hijos.
 
 public class Trie<T> {
 
@@ -73,7 +72,7 @@ public class Trie<T> {
         public void killChild(char valorHijo) {
             if ((hijos.get((int) valorHijo) != null)) {
                 hijos.set((int) valorHijo, null);
-                this.cantidadHijos--;
+                this.cantidadHijos -= 1;
             }
         }
 
@@ -142,7 +141,7 @@ public class Trie<T> {
         // una palabra
         // pero ademas tiene hijos porque siguiendo los hijos es la clave de otro valor
 
-        if (actual.cantidadHijos == 1) {
+        if (actual.cantidadHijos > 0) {
             actual.data = null;
             actual.esFinPalabra = false;
         } else {
@@ -158,15 +157,19 @@ public class Trie<T> {
             // (mientras no haya una bifurcacion, cuando se distinguen las claves,
             // no es un nodo compartido con otra palabra)
             // y mientras el padre no tenga asociada una materia
-            while (padre.cantidadHijos == 1 && padre.data == null) {
+            while (padre.cantidadHijos == 1 && padre.data == null && padre.getFather() != null) {
 
                 // el padre mata a un hijo especifico a lo Cronos
                 padre.killChild(caracteres[clave.length() - i]);
+                padre.esFinPalabra = false;
                 i++;
+                padre = padre.getFather();
             }
             // fuera del loop estarias parado en la ultimo nodo que hay que eliminar
             // y vamos al padre por ultima vez para eliminarlo ya fuera del ciclo.
             padre.killChild(caracteres[clave.length() - i]);
+            padre.esFinPalabra = false;
+
         }
 
     }
@@ -174,14 +177,16 @@ public class Trie<T> {
     public String[] getClavesEnOrdenLexicografico() {
         // creamos un ArrayList vacio que guardara el resultado final
         ListaEnlazada<String> conjClaves = new ListaEnlazada<>();
+        StringBuilder palabra = new StringBuilder();
+        Stack<String> pila = new Stack<String>();
 
-        obtenerClaves(raiz, "", conjClaves);
+        obtenerClaves(raiz, palabra, pila, conjClaves);
 
         String[] resultado = new String[conjClaves.longitud()];
         Iterador<String> it = conjClaves.iterador();
 
         for (int i = 0; it.haySiguiente() == true; i++) {
-            // Código a ejecutar en cada iteración
+
             String siguiente = it.siguiente();
             resultado[i] = siguiente;
 
@@ -190,16 +195,35 @@ public class Trie<T> {
         return resultado;
     }
 
-    private void obtenerClaves(Trie<T>.TrieNode nodo, String prefijo, ListaEnlazada<String> resultado) {
+    private void obtenerClaves(Trie<T>.TrieNode nodo, StringBuilder prefijo, Stack<String> pila,
+            ListaEnlazada<String> resultado) {
+
+        if (nodo.cantidadHijos > 1) {
+            for (int i = 1; i < nodo.cantidadHijos; i++) {
+                pila.push(prefijo.toString());
+            }
+
+        }
         if (nodo.esFinPalabra) {
-            resultado.agregarAtras(prefijo);
+            resultado.agregarAtras(prefijo.toString());
+            if (nodo.cantidadHijos == 0) {
+                prefijo.setLength(0);
+            }
         }
 
         for (Trie<T>.TrieNode hijo : nodo.hijos) {
             if (hijo != null) {
-                obtenerClaves(hijo, prefijo + hijo.valor, resultado);
+
+                if (nodo.cantidadHijos > 1 && !pila.empty() && prefijo.isEmpty()) {
+                    prefijo.append(pila.pop());
+                }
+
+                prefijo.append(hijo.valor);
+
+                obtenerClaves(hijo, prefijo, pila, resultado);
             }
         }
+
     }
 
     // devuelve la raiz del Trie

@@ -1,0 +1,46 @@
+private void obtenerClaves(Trie<T>.TrieNode nodo, StringBuilder empty, ListaEnlazada<String> resultado) {
+
+        if (nodo.esFinPalabra) {
+            resultado.agregarAtras(empty.toString());
+
+        }
+
+        for (Trie<T>.TrieNode hijo : nodo.hijos) {
+            if (hijo != null) {
+
+                if (nodo.valor != '\0') {
+                    empty.append(nodo.valor);
+                }
+                if (hijo.cantidadHijos == 0) {
+
+                    empty.append(hijo.valor);
+
+                }
+
+                obtenerClaves(hijo, empty, resultado);
+            }
+        }
+        if (nodo.esFinPalabra) {
+
+            if (nodo.cantidadHijos == 0) {
+                empty.setLength(0);
+            }
+
+        }
+
+
+###FUNCIONA
+        if (nodo.esFinPalabra) {
+            resultado.agregarAtras(prefijo);
+
+            if (nodo.cantidadHijos == 0) {
+
+            }
+        }
+
+        for (TrieNode hijo : nodo.hijos) {
+
+            if (hijo != null) {
+                obtenerClaves(hijo, prefijo + hijo.valor, resultado);
+            }
+        }

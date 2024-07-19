@@ -2,8 +2,7 @@ package aed;
 
 // Invariante de Representacion de TrieCarreras:
 
-// - Es un Trie
-// - Almacena TrieMaterias como valores
+// Los valores que almacenan son instancias validas de DiccionarioMateria
 
 public class DiccionarioCarreras extends Trie<DiccionarioMaterias> {
 

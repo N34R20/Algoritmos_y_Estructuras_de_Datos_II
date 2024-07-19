@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 // Invariante de SistemaSIU
 
+// 
+
 public class SistemaSIU {
 
     DiccionarioEstudiante estudiantes;
@@ -67,7 +69,7 @@ public class SistemaSIU {
 
                 sistema.insertar(carrera, nombreMateria, materia);
                 DiccionarioMaterias TrieMateria = sistema.buscar(carrera);
-                NodoCarreraYMateria nycm = new NodoCarreraYMateria(TrieMateria, nombreMateria);
+                ReferenciaADiccionarioYClave nycm = new ReferenciaADiccionarioYClave(TrieMateria, nombreMateria);
                 materia.addNombresYNodos(nycm);
 
             }
@@ -250,7 +252,7 @@ public class SistemaSIU {
         Materia materia = sistema.buscar(carrera).buscar(nombreMateria);
         ListaEnlazada<String> conjuntoDeAlumnos = materia.getConjuntoAlumnos();
 
-        ArrayList<NodoCarreraYMateria> nombresYNodosMateria = materia.getNombresYNodos();
+        ArrayList<ReferenciaADiccionarioYClave> nombresYNodosMateria = materia.getNombresYNodos();
 
         //
         Iterador<String> it = conjuntoDeAlumnos.iterador();
@@ -262,8 +264,8 @@ public class SistemaSIU {
 
         }
 
-        for (NodoCarreraYMateria nycm : nombresYNodosMateria) {
-            nycm.raizCarrera().borrar(nycm.getNombreMateria());
+        for (ReferenciaADiccionarioYClave nycm : nombresYNodosMateria) {
+            nycm.dictMateria().borrar(nycm.getNombreMateria());
         }
     }
 

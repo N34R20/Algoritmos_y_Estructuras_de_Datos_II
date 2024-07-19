@@ -4,11 +4,11 @@ package aed;
 
 // - nombreMateria es una clave valida en trieMateria
 
-public class NodoCarreraYMateria {
+public class ReferenciaADiccionarioYClave {
     DiccionarioMaterias dictMateria;
     String nombreMateria;
 
-    public NodoCarreraYMateria(DiccionarioMaterias dictMateria, String nombreMateria) {
+    public ReferenciaADiccionarioYClave(DiccionarioMaterias dictMateria, String nombreMateria) {
         this.dictMateria = dictMateria;
         this.nombreMateria = nombreMateria;
     }
@@ -17,7 +17,7 @@ public class NodoCarreraYMateria {
         return this.nombreMateria;
     }
 
-    public DiccionarioMaterias raizCarrera() {
+    public DiccionarioMaterias dictMateria() {
         return this.dictMateria;
     }
 }

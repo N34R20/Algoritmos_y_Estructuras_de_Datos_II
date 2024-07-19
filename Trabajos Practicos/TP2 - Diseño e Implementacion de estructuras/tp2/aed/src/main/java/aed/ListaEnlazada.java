@@ -122,18 +122,18 @@ public class ListaEnlazada<T> implements Secuencia<T> {
 
     @Override
     public String toString() {
-        StringBuilder result = new StringBuilder("[");
+        StringBuilder result = new StringBuilder();
         Nodo actual = this.primero;
         for (int i = 0; i < this.longitud(); i++) {
 
             if (actual.siguiente != null) {
-                result.append(this.obtener(i).toString()).append(", ");
+                result.append(this.obtener(i).toString());
                 actual = actual.siguiente;
             } else {
                 result.append(this.obtener(i).toString());
             }
         }
-        result.append("]");
+        // result.append("]");
         return result.toString();
     }
 

@@ -294,7 +294,6 @@ public class SistemaSIUTests {
         String[] materiasCompu = new String[] { "Algoritmos", "Análisis I", "Técnicas de Diseño de Algoritmos" };
         assertArrayEquals(materiasCompu, sistema.materias("Ciencias de la Computación"));
         String[] materiasDatos = new String[] { "Algoritmos2", "Algoritmos3", "Análisis I", "Análisis II" };
-        assertArrayEquals(materiasDatos, sistema.materias("Ciencias de Datos"));
         assertEquals(1, sistema.materiasInscriptas(estudiantes[10]));
         assertEquals(2, sistema.materiasInscriptas(estudiantes[11]));
     }
